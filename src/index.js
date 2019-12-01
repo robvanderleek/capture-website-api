@@ -9,6 +9,12 @@ function capture(req, res) {
     console.log('URL: ' + url);
     console.log(req.query);
     console.log('capturing...');
+    queryParams.launchOptions = {
+        args: [
+            '--no-sandbox',
+            '--disable-setuid-sandbox'
+        ]
+    };
     captureWebsite.buffer(url, queryParams).then((buffer) => res.send(buffer));
 }
 
