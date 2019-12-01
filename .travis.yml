@@ -9,5 +9,7 @@ notifications:
     on_success: never
 deploy:
   provider: heroku
-  app: 
+  app:
     master: capture-website-rest-patching
+  api_key:
+    secure: euvbYl491Cu/7V0pQwE1iGSgX7/dKau38NANx1VikkzMXzHNXXpdUcGzlhaNdlPZBJom6SW/lvfWR0SXyqT/fCLwp5ZFuE/QkRSUp2QtSolQelreTPzKVIaFdyzgQxpJpk17WRMDSwtm0kYy2EaclHhGFfy2DySeKshChU2ZL1AU/c9h7fjPGLeGBFXZAutx+odUFim3PxZ80mP3INULqfCdov+TWeJS7gnN8V59tycMk+iEr17KP55aNGsm2YJjKjAPI7D852lzWC/EjVxhv+9pJrGs4FID1oAqidhXeek3CrzhVWdxV3OYokQ1QhNteMIcjePEDWGwSp3cAmWHxwF0lSC4+qboEp3XHGfYJw/njfyf7dT1xgu2D2w8tSR/4+vnABMPANM6NKTTqegZfnwe1ZdCl5NOhB51gwd1ZVjzH4wIKxc4TeStZCW9oat0X9ZyOmZvcoCjaWSn01rNDYy3XH3n448eOWjJ3b/GksRWbppLn6k2CZwzUY/8F7Ac4oUPKwd+u50aZ99mqXlxi3ckYU4uUC3GgXTiMoSMuRgGrKgxUgxPbNlwX9wzZNFhxjylhLJ0KVs6eCbS5UssCLZmhX2x5c5iJixPd6i7d78SDgxooh/XLy+FovEV+iwokNdjTqbfyfJMY0xxYKwPhIBaqMQvmEnUZp9EHPubsp0=
