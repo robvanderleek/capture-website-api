@@ -2,15 +2,14 @@ language: node_js
 cache:
   directories:
   - "$HOME/.npm"
+env:
+  global:
+    - HEROKU_APP_NAME=capture-website-rest-patching
 node_js:
 - lts/*
 notifications:
   email:
     on_success: never
-deploy:
-  provider: heroku
-  api_key:
-    secure: PR5G9VxMqyIn8V9OJ8GBbTRjb7xTjFLy53ha30l/oySC4uIStmWgocuBkc1Bqk2woM84AXf8bGwLcnroPohM/v7xju2S1/14EQgzR3cwgwhLZrhMPE6se3yEFEyMfwCimwvuD5e3z1mYljTx8oP2/jw1v0DSwq54DfAWXeg6h+B+AByXBmT0NTgZoCXTxXOA+Hv7A2RszSMYJ14wPpEvsIs1bh47ZhEYb5z2BrHU/pmIlfsOs6Z4L2JJhxpCopayAfSumd/oNcf7tq1xp018kVr2fdTSqUQTCx0704MbVm3jsleB+bTklHY1MkDmfLglx3013Wu9ztkrIzyoqk+SwQlXCfCQ7gBHNuhDRGsorZSIu53hezS350nuQ2RDeDsp1a55SWC1vai8X+4z7zNa2Fm0IFXM6nKZj5Bhz+8r0I3UNvFiciqwkOh7yI+khnhbl+mGn9Mrhuha4DfEkLdiUVflJhb4ILRgFbZ0jLtL67vHBSmyhq65bCIEtUx3EBeMIt1ixYnZ8rix1AeU2IknI5NXrs9YP4iyEZvAcKPmsgDhIGIEdODWTsfqOS2cooabrbk4sXvUXfyLCtu2zGd7e2evxqehUO+5tvuTCIV5mwpoQJHICnqnb4CA8MLPfZTy0DTXPBFv52SgucdFRfsSO4+HKf1yKuNZ6aufqEOqmWI=
-  app: capture-website-rest-patching
-  on:
-    repo: robvanderleek/capture-website-rest
+after_success:
+  - test "$TRAVIS_BRANCH" = "master" && test "$TRAVIS_PULL_REQUEST" = "false" \
+    && sh .travis/deploy_heroku.sh
