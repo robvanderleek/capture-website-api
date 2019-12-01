@@ -2,9 +2,6 @@ language: node_js
 cache:
   directories:
   - "$HOME/.npm"
-env:
-  global:
-    - HEROKU_APP_NAME=capture-website-rest-patching
 node_js:
 - lts/*
 notifications:
@@ -12,4 +9,5 @@ notifications:
     on_success: never
 after_success:
   - test "$TRAVIS_BRANCH" = "master" && test "$TRAVIS_PULL_REQUEST" = "false"
-    && sh .travis/deploy_heroku.sh
+    && sh .travis/deploy_heroku.sh capture-website-rest
+    && sh .travis/deploy_heroku.sh capture-website-rest-patching
