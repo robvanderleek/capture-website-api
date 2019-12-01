@@ -11,5 +11,5 @@ notifications:
   email:
     on_success: never
 after_success:
-  - test "$TRAVIS_BRANCH" = "master" && test "$TRAVIS_PULL_REQUEST" = "false" \
+  - test "$TRAVIS_BRANCH" = "master" && test "$TRAVIS_PULL_REQUEST" = "false"
     && sh .travis/deploy_heroku.sh
