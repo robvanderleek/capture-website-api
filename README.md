@@ -20,7 +20,9 @@ $ curl 'https://capture-website-api.herokuapp.com/capture?url=https://twitter.co
 
 Run pre-built container from Docker Hub:
 ```
-
+$ docker pull robvanderleek/capture-website-api
+$ docker run -it -p 3000:3000 robvanderleek/capture-website-api
+$ curl 'localhost:3000/capture?url=https://news.ycombinator.com/' -o screenshot.png
 ``` 
 
 Build the docker image and run it:
@@ -57,3 +59,7 @@ $ heroku container:release web
 $ CWA_URL=$(heroku info -s | grep web_url | cut -d= -f2)
 $ curl "${CWA_URL}capture?url=https://www.linkedin.com" -o screenshot.png
 ```
+
+# Usage
+
+# Configuration
