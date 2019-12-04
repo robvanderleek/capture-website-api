@@ -15,7 +15,7 @@ test('show results on with environment variable', () => {
 test('generate homepage', () => {
     const res = {send: jest.fn()};
 
-    helpers.homepage({}, res);
+    helpers.latestCapturePage({}, res);
 
     expect(res.send).toBeCalledTimes(1);
 });
