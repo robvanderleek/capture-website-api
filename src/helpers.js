@@ -44,7 +44,7 @@ function capture(req, res) {
     });
 }
 
-function homepage(req, res) {
+function latestCapturePage(req, res) {
     let page = '';
     page += '<html lang="en">\n';
     page += '<body>\n';
@@ -70,5 +70,5 @@ module.exports = {
     validRequest: validRequest,
     latestCapture: latestCapture,
     capture: capture,
-    homepage: homepage
+    latestCapturePage: latestCapturePage
 };

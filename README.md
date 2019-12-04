@@ -62,4 +62,15 @@ $ curl "${CWA_URL}capture?url=https://www.linkedin.com" -o screenshot.png
 
 # Usage
 
+Call the `/capture` endpoint and pass the site URL using the query parameters `url`:
+```
+$ curl 'https://capture-website-api.herokuapp.com/capture?url=http://gmail.com' -o screenshot.png
+```
+Simple as that.
+
 # Configuration
+
+This API looks two environment variables:
+
+* `SHOW_RESULTS`: if `true` the latest capture result can be viewed in the browser by browsing the base url (e.g.: https://capture-website-api.herokuapp.com/)  
+* `SECRET`: when set all capture requests need to contain a query parameter `secret` whose value matches the value of this environment variable
