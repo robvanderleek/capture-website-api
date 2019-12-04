@@ -62,7 +62,7 @@ function latestCapturePage(req, res) {
 
 function latestCapture(req, res) {
     res.type('png');
-    res.send(latestCapture);
+    res.send(latest.capture);
 }
 
 module.exports = {
