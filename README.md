@@ -68,6 +68,14 @@ $ curl 'https://capture-website-api.herokuapp.com/capture?url=http://gmail.com' 
 ```
 Simple as that.
 
+Most of the configuration options from the wrapped `capture-website` library are supported using query parameters. 
+For example, to capture a site with a 650x350 viewport, no default background and animations disabled use:
+```
+curl 'https://capture-website-api.herokuapp.com/capture?url=http://amazon.com&width=650&height=350&scaleFactor=1&defaultBackground=false&disableAnimations=true' -o screenshot.png
+```
+
+See https://github.com/sindresorhus/capture-website for a full list of options.
+
 # Configuration
 
 This API looks two environment variables:

@@ -41,3 +41,32 @@ test('all requests are valid when secrets match', () => {
 
     process.env.SECRET = undefined;
 });
+
+test('field values to number', () => {
+    const obj = {aap: '5', noot: '6', mies: 'seven'};
+
+    helpers.fieldValuesToNumber(obj, 'aap');
+
+    expect(typeof obj.aap).toBe('number');
+    expect(typeof obj.noot).toBe('string');
+    expect(typeof obj.mies).toBe('string');
+});
+
+test('field values to number, multiple fields', () => {
+    const obj = {aap: '5', noot: '6', mies: 'seven'};
+
+    helpers.fieldValuesToNumber(obj, 'aap', 'noot');
+
+    expect(typeof obj.aap).toBe('number');
+    expect(typeof obj.noot).toBe('number');
+    expect(typeof obj.mies).toBe('string');
+});
+
+test('field values to number, no number value', () => {
+    const obj = {aap: '5', noot: '6', mies: 'seven'};
+
+    helpers.fieldValuesToNumber(obj, 'mies');
+
+    expect(typeof obj.mies).toBe('string');
+    expect(obj.mies).toBe('seven');
+});

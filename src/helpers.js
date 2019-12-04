@@ -38,9 +38,22 @@ function capture(req, res) {
             '--disable-setuid-sandbox'
         ]
     };
+    fieldValuesToNumber(queryParams, 'width', 'height', 'quality', 'scaleFactor', 'timeout', 'delay', 'offset');
     captureWebsite.buffer(url, queryParams).then((buffer) => {
         latest.capture = buffer;
         res.send(buffer);
+    }).catch((e) => {
+        console.log('Capture failed due to: ' + e.message);
+        res.status(500).send(e.message);
+    });
+}
+
+function fieldValuesToNumber(obj, ...fields) {
+    fields.forEach(f => {
+        if (obj[f]) {
+            const val = Number(obj[f]);
+            obj[f] = Number.isNaN(val) ? obj[f] : val;
+        }
     });
 }
 
@@ -70,5 +83,6 @@ module.exports = {
     validRequest: validRequest,
     latestCapture: latestCapture,
     capture: capture,
-    latestCapturePage: latestCapturePage
+    latestCapturePage: latestCapturePage,
+    fieldValuesToNumber: fieldValuesToNumber
 };

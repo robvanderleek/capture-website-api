@@ -9,4 +9,4 @@ if (helpers.showResults()) {
     app.get('/latest', helpers.latestCapture);
 }
 
-app.listen(port, () => console.log('listening...'));
+app.listen(port, () => console.log(`listening at port ${port}...`));
