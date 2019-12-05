@@ -41,11 +41,19 @@ function capture(req, res) {
     fieldValuesToNumber(queryParams, 'width', 'height', 'quality', 'scaleFactor', 'timeout', 'delay', 'offset');
     captureWebsite.buffer(url, queryParams).then((buffer) => {
         latest.capture = buffer;
-        res.send(buffer);
+        const responseType = getResponseType(queryParams);
+        res.type(responseType).send(buffer);
     }).catch((e) => {
         console.log('Capture failed due to: ' + e.message);
         res.status(500).send(e.message);
     });
+}
+
+function getResponseType(queryParams) {
+    if (queryParams.type && queryParams.type === 'jpeg') {
+        return 'jpg';
+    }
+    return 'png';
 }
 
 function fieldValuesToNumber(obj, ...fields) {
@@ -84,5 +92,6 @@ module.exports = {
     latestCapture: latestCapture,
     capture: capture,
     latestCapturePage: latestCapturePage,
-    fieldValuesToNumber: fieldValuesToNumber
+    fieldValuesToNumber: fieldValuesToNumber,
+    getResponseType: getResponseType
 };

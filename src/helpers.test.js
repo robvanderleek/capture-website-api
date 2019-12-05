@@ -70,3 +70,9 @@ test('field values to number, no number value', () => {
     expect(typeof obj.mies).toBe('string');
     expect(obj.mies).toBe('seven');
 });
+
+test('get response type', () => {
+    expect(helpers.getResponseType({})).toBe('png');
+    expect(helpers.getResponseType({type: 'jpeg'})).toBe('jpg');
+    expect(helpers.getResponseType({type: 'png'})).toBe('png');
+});
