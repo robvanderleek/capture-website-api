@@ -5,6 +5,7 @@
 [![Build Status](https://travis-ci.com/robvanderleek/capture-website-api.svg?branch=master)](https://travis-ci.com/robvanderleek/capture-website-api)
 [![BCH compliance](https://bettercodehub.com/edge/badge/robvanderleek/capture-website-api?branch=master)](https://bettercodehub.com/)
 [![Dependabot](https://badgen.net/badge/Dependabot/enabled/green?icon=dependabot)](https://dependabot.com/)
+[![DockerHub image pulls](https://img.shields.io/docker/pulls/robvanderleek/capture-website-api)](https://hub.docker.com/repository/docker/robvanderleek/capture-website-api)
 
 Capture screenshots of websites as a (host it yourself) API. This project is a wrapper around this library: https://github.com/sindresorhus/capture-website
 
@@ -82,3 +83,11 @@ This API looks two environment variables:
 
 * `SHOW_RESULTS`: if `true` the latest capture result can be viewed in the browser by browsing the base url (e.g.: https://capture-website-api.herokuapp.com/)  
 * `SECRET`: when set all capture requests need to contain a query parameter `secret` whose value matches the value of this environment variable
+
+# Contributing
+
+If you have suggestions for improvements, or want to report a bug, [open an issue](https://github.com/robvanderleek/capture-website-api/issues)!
+
+# License
+
+[ISC](LICENSE) © 2019 Rob van der Leek <robvanderleek@gmail.com> (https://twitter.com/robvanderleek)
