@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "@types/jest": "^24.9.0",
-    "@types/node": "^12.12.21",
+    "@types/node": "^13.1.7",
     "jest": "^24.9.0",
     "nodemon": "^2.0.2"
   }
