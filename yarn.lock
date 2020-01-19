@@ -815,10 +815,10 @@ capture-stack-trace@^1.0.0:
   resolved "https://registry.yarnpkg.com/capture-stack-trace/-/capture-stack-trace-1.0.1.tgz#a6c0bbe1f38f3aa0b92238ecb6ff42c344d4135d"
   integrity sha512-mYQLZnx5Qt1JgB1WEiMCf2647plpGeQ2NMR/5L0HNZzGQo4fuSPnK+wjfPnKZV0aiJDgzmWqqkV/g7JD+DW0qw==
 
-capture-website@^0.8.0:
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/capture-website/-/capture-website-0.8.0.tgz#0d9a437562762d024170fcf3494ea6c9ddc114e8"
-  integrity sha512-YALHCCQbohqhsG7OXF2TDmphchhvlBNss1ZC4kNZ6XTNZ0zhlG2EUf4MpTEO7u/hzekcdgcKyr/2iEjAnJLZzA==
+capture-website@^0.8.1:
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/capture-website/-/capture-website-0.8.1.tgz#66ef7b306a9d73f81d57a1f64fa42167fb1cc086"
+  integrity sha512-2fcVq/Z2epiZld5sSvMqw9vFo2OxHrC2ryqRB0Nwh61Q72W+eBd/4M+StSqBGSErRlP1N/FkBpBT6IUtDr8MZQ==
   dependencies:
     file-url "^3.0.0"
     puppeteer "^2.0.0"
