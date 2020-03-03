@@ -1,4 +1,5 @@
 const captureWebsite = require('capture-website');
+const puppeteer = require('puppeteer');
 
 const latest = {
     capture: undefined,
@@ -22,7 +23,7 @@ function validRequest(req) {
     return req.query.secret === secret;
 }
 
-function capture(req, res) {
+async function capture(req, res) {
     if (!validRequest(req)) {
         res.status(403).send('Go away please');
         return;
@@ -35,18 +36,24 @@ function capture(req, res) {
     queryParams.launchOptions = {
         args: [
             '--no-sandbox',
-            '--disable-setuid-sandbox'
+            '--disable-setuid-sandbox',
+            '--hide-scrollbars',
+            '--mute-audio'
         ]
     };
+    const browser = await puppeteer.launch(queryParams.launchOptions);
+    queryParams._browser = browser;
     fieldValuesToNumber(queryParams, 'width', 'height', 'quality', 'scaleFactor', 'timeout', 'delay', 'offset');
-    captureWebsite.buffer(url, queryParams).then((buffer) => {
+    try {
+        const buffer = await captureWebsite.buffer(url, queryParams);
         latest.capture = buffer;
         const responseType = getResponseType(queryParams);
         res.type(responseType).send(buffer);
-    }).catch((e) => {
+    } catch (e) {
         console.log('Capture failed due to: ' + e.message);
         res.status(500).send(e.message);
-    });
+    }
+    browser.close();
 }
 
 function getResponseType(queryParams) {
