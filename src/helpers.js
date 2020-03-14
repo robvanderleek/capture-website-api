@@ -1,6 +1,8 @@
 const captureWebsite = require('capture-website');
 const puppeteer = require('puppeteer');
 
+const DEFAULT_TIMEOUT_SECONDS = 10;
+
 const latest = {
     capture: undefined,
     url: undefined,
@@ -10,6 +12,23 @@ const latest = {
 function showResults() {
     const showResults = process.env.SHOW_RESULTS;
     return showResults && showResults === 'true';
+}
+
+async function takePlainPuppeteerScreenshot(url, options) {
+    options.encoding = 'binary';
+    const browser = await puppeteer.launch(options.launchOptions);
+    const page = await browser.newPage();
+    await page.goto(url);
+    await new Promise(r => setTimeout(r, 3000));
+    const viewportOptions = {
+        width: options.width,
+        height: options.height,
+        deviceScaleFactor: options.scaleFactor
+    };
+    await page.setViewport(viewportOptions);
+    const buffer = await page.screenshot();
+    await browser.close();
+    return buffer;
 }
 
 function validRequest(req) {
@@ -34,6 +53,7 @@ async function capture(req, res) {
     latest.url = url;
     console.log('Capturing URL: ' + url + ' ...');
     queryParams.launchOptions = {
+        // headless: false,
         args: [
             '--no-sandbox',
             '--disable-setuid-sandbox',
@@ -42,6 +62,9 @@ async function capture(req, res) {
         ]
     };
     const browser = await puppeteer.launch(queryParams.launchOptions);
+    if (!queryParams.timeout) {
+        queryParams.timeout = DEFAULT_TIMEOUT_SECONDS;
+    }
     queryParams._browser = browser;
     fieldValuesToNumber(queryParams, 'width', 'height', 'quality', 'scaleFactor', 'timeout', 'delay', 'offset');
     try {
@@ -50,8 +73,17 @@ async function capture(req, res) {
         const responseType = getResponseType(queryParams);
         res.type(responseType).send(buffer);
     } catch (e) {
-        console.log('Capture failed due to: ' + e.message);
-        res.status(500).send(e.message);
+        console.info(`Capture website failed for URL: ${url}`);
+        console.info('Retrying with plain Puppeteer...');
+        try {
+            const buffer = await takePlainPuppeteerScreenshot(url, queryParams);
+            latest.capture = buffer;
+            const responseType = getResponseType(queryParams);
+            res.type(responseType).send(buffer);
+        } catch (e) {
+            console.log('Capture failed due to: ' + e.message);
+            res.status(500).send(e.message);
+        }
     }
     browser.close();
 }
