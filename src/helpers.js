@@ -20,15 +20,21 @@ async function takePlainPuppeteerScreenshot(url, options) {
     const page = await browser.newPage();
     await page.goto(url);
     await new Promise(r => setTimeout(r, 3000));
-    const viewportOptions = {
-        width: options.width,
-        height: options.height,
-        deviceScaleFactor: options.scaleFactor
-    };
-    await page.setViewport(viewportOptions);
+    await setViewport(page, options);
     const buffer = await page.screenshot();
     await browser.close();
     return buffer;
+}
+
+async function setViewport(page, options) {
+    if (options.width && options.height) {
+        const viewportOptions = {
+            width: options.width,
+            height: options.height,
+            deviceScaleFactor: options.scaleFactor ? options.scaleFactor : 1
+        };
+        await page.setViewport(viewportOptions);
+    }
 }
 
 function validRequest(req) {
@@ -58,7 +64,8 @@ async function capture(req, res) {
             '--no-sandbox',
             '--disable-setuid-sandbox',
             '--hide-scrollbars',
-            '--mute-audio'
+            '--mute-audio',
+            '--use-fake-ui-for-media-stream' // Pages that ask for webcam/microphone access
         ]
     };
     const browser = await puppeteer.launch(queryParams.launchOptions);
@@ -111,7 +118,7 @@ function latestCapturePage(req, res) {
     page += '<h1>Latest capture</h1>';
     if (latest.capture) {
         page += '<p>Date: ' + latest.date + '</p>\n';
-        page += '<img src="/latest" width="800" />\n';
+        page += '<img src="/latest" width="800"  alt="Latest capture"/>\n';
     } else {
         page += '<p>No capture found!</p>\n';
     }
