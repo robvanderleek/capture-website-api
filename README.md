@@ -91,4 +91,3 @@ If you have suggestions for improvements, or want to report a bug, [open an issu
 # License
 
 [ISC](LICENSE) © 2019 Rob van der Leek <robvanderleek@gmail.com> (https://twitter.com/robvanderleek)
-
