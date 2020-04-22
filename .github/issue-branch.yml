@@ -1,3 +1,0 @@
-branchName: '${issue.number}-${issue.title}'
-mode: chatops
-autoCloseIssue: true
