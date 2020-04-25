@@ -74,25 +74,33 @@ async function capture(req, res) {
     }
     queryParams._browser = browser;
     fieldValuesToNumber(queryParams, 'width', 'height', 'quality', 'scaleFactor', 'timeout', 'delay', 'offset');
-    try {
-        const buffer = await captureWebsite.buffer(url, queryParams);
-        latest.capture = buffer;
-        const responseType = getResponseType(queryParams);
-        res.type(responseType).send(buffer);
-    } catch (e) {
-        console.info(`Capture website failed for URL: ${url}`);
-        console.info('Retrying with plain Puppeteer...');
+    if (queryParams.plainPuppeteer === 'true') {
+        await tryWithPuppeteer(url, queryParams, res);
+    } else {
         try {
-            const buffer = await takePlainPuppeteerScreenshot(url, queryParams);
+            const buffer = await captureWebsite.buffer(url, queryParams);
             latest.capture = buffer;
             const responseType = getResponseType(queryParams);
             res.type(responseType).send(buffer);
         } catch (e) {
-            console.log('Capture failed due to: ' + e.message);
-            res.status(500).send(e.message);
+            console.info(`Capture website failed for URL: ${url}`);
+            console.info('Retrying with plain Puppeteer...');
+            await tryWithPuppeteer(url, queryParams, res);
         }
     }
     browser.close();
+}
+
+async function tryWithPuppeteer(url, queryParams, res) {
+    try {
+        const buffer = await takePlainPuppeteerScreenshot(url, queryParams);
+        latest.capture = buffer;
+        const responseType = getResponseType(queryParams);
+        res.type(responseType).send(buffer);
+    } catch (e) {
+        console.log('Capture failed due to: ' + e.message);
+        res.status(500).send(e.message);
+    }
 }
 
 function getResponseType(queryParams) {
