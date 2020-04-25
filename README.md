@@ -69,6 +69,10 @@ $ curl 'https://capture-website-api.herokuapp.com/capture?url=http://gmail.com' 
 ```
 Simple as that.
 
+# Configuration
+
+## Capturing options
+
 Most of the configuration options from the wrapped `capture-website` library are supported using query parameters. 
 For example, to capture a site with a 650x350 viewport, no default background and animations disabled use:
 ```
@@ -77,9 +81,14 @@ curl 'https://capture-website-api.herokuapp.com/capture?url=http://amazon.com&wi
 
 See https://github.com/sindresorhus/capture-website for a full list of options.
 
-# Configuration
+## Use plain Puppeteer 
 
-This API looks two environment variables:
+Sometimes the `capture-website` library has problems capturing sites. You can try to
+capture these sites with plain Puppeteer by supplying the query parameter `plainPuppeteer=true`
+
+## Environment variables
+
+This app looks at two environment variables:
 
 * `SHOW_RESULTS`: if `true` the latest capture result can be viewed in the browser by browsing the base url (e.g.: https://capture-website-api.herokuapp.com/)  
 * `SECRET`: when set all capture requests need to contain a query parameter `secret` whose value matches the value of this environment variable
