@@ -1,2 +1,1 @@
 mode: chatops
-branchName: '${issue.number}-${issue.title}/${issue.doestnotexist}'
