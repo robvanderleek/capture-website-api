@@ -17,7 +17,7 @@
     "puppeteer": "^3.1.0"
   },
   "devDependencies": {
-    "@types/jest": "^25.2.2",
+    "@types/jest": "^25.2.3",
     "@types/node": "^14.0.5",
     "jest": "^25.5.4",
     "nodemon": "^2.0.4"
