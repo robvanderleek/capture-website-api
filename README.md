@@ -31,7 +31,7 @@ Build the docker image and run it:
 $ git clone git@github.com:robvanderleek/capture-website-api.git
 $ cd capture-website-api
 $ docker build -t cwa .
-$ docker run -it -p 3000:3000 cwa
+$ docker run -it -p 8080:8080 cwa
 $ curl 'localhost:3000/capture?url=https://www.youtube.com' -o screenshot.png
 ```
 

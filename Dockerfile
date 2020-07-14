@@ -1,6 +1,6 @@
 FROM node:13-slim
 RUN apt-get update && apt-get install --no-install-recommends -yq \
-    libgconf-2-4 ca-certificates wget curl gnupg2 python
+    libgconf-2-4 libxss1 ca-certificates wget curl gnupg2 python
 ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE 1
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub |\
     apt-key add -
