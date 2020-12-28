@@ -51,12 +51,13 @@ jobs:
         heroku_email: 'robvanderleek@gmail.com'
         usedocker: true
 
-    - name: 'Deploy to Heroku'
+    - name: 'Deploy to Heroku (capture-website-api-patching)'
       uses: akhileshns/heroku-deploy@v3.8.8
       with:
         heroku_api_key: ${{secrets.HEROKU_API_KEY}}
         heroku_app_name: 'capture-website-api-patching'
         heroku_email: 'robvanderleek@gmail.com'
+        usedocker: true
 
   merge_me:
     name: 'Auto-merge dependabot PRs'
