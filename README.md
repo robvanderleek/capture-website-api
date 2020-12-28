@@ -1,8 +1,8 @@
 # Capture website API
 
-![Night nurse](static/screenshot.png)
+![Screenshot](static/screenshot.png)
 
-[![Build Status](https://travis-ci.com/robvanderleek/capture-website-api.svg?branch=master)](https://travis-ci.com/robvanderleek/capture-website-api)
+[![Build Status](https://github.com/robvanderleek/capture-website-api/workflows/Prod/badge.svg)](https://github.com/robvanderleek/capture-website-api/actions)
 [![BCH compliance](https://bettercodehub.com/edge/badge/robvanderleek/capture-website-api?branch=master)](https://bettercodehub.com/)
 [![Dependabot](https://badgen.net/badge/Dependabot/enabled/green?icon=dependabot)](https://dependabot.com/)
 [![DockerHub image pulls](https://img.shields.io/docker/pulls/robvanderleek/capture-website-api)](https://hub.docker.com/repository/docker/robvanderleek/capture-website-api)

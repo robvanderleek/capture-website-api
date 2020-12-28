@@ -1,0 +1,64 @@
+name: Prod
+on: 
+  push:
+    branches:
+      - master
+jobs:
+  cicd:
+    runs-on: ubuntu-latest
+    env:
+      CI: true
+    steps:
+    - name: 'Checkout repository'
+      uses: actions/checkout@v1
+
+    - name: 'Setup NodeJS'
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14.x
+
+    - name: 'Install depenencies'
+      run: yarn install
+
+    - name: 'Run tests'
+      run: yarn test
+
+    - name: 'Login to DockerHub'
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+    - name: 'Build and push Docker image'
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        file: ./Dockerfile
+        push: true
+        tags: robvanderleek/capture-website-api:latest
+
+    - name: 'Deploy to Heroku (capture-website-api)'
+      uses: akhileshns/heroku-deploy@v3.8.8
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: 'capture-website-api'
+          heroku_email: 'robvanderleek@gmail.com'
+          usedocker: true
+
+    - name: 'Deploy to Heroku'
+      uses: akhileshns/heroku-deploy@v3.8.8
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: 'capture-website-api-patching'
+          heroku_email: 'robvanderleek@gmail.com'
+
+  merge_me:
+    name: 'Auto-merge dependabot PRs'
+    needs: cicd
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Merge dependabot PR branch'
+        uses: ridedott/merge-me-action@master
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_LOGIN: dependabot[bot]
