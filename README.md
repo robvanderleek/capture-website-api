@@ -22,8 +22,8 @@ $ curl 'https://capture-website-api.herokuapp.com/capture?url=https://twitter.co
 Run pre-built container from Docker Hub:
 ```
 $ docker pull robvanderleek/capture-website-api
-$ docker run -it -p 3000:3000 robvanderleek/capture-website-api
-$ curl 'localhost:3000/capture?url=https://news.ycombinator.com/' -o screenshot.png
+$ docker run -it -p 8080:8080 robvanderleek/capture-website-api
+$ curl 'localhost:8080/capture?url=https://news.ycombinator.com/' -o screenshot.png
 ``` 
 
 Build the docker image and run it:
@@ -32,7 +32,7 @@ $ git clone git@github.com:robvanderleek/capture-website-api.git
 $ cd capture-website-api
 $ docker build -t cwa .
 $ docker run -it -p 8080:8080 cwa
-$ curl 'localhost:3000/capture?url=https://www.youtube.com' -o screenshot.png
+$ curl 'localhost:8080/capture?url=https://www.youtube.com' -o screenshot.png
 ```
 
 ## Yarn
@@ -43,7 +43,7 @@ $ git clone git@github.com:robvanderleek/capture-website-api.git
 $ cd capture-website-api
 $ yarn
 $ yarn start
-$ curl 'localhost:3000/capture?url=https://www.reddit.com' -o screenshot.png
+$ curl 'localhost:8080/capture?url=https://www.reddit.com' -o screenshot.png
 ```
 
 ## Heroku
