@@ -39,18 +39,18 @@ jobs:
 
     - name: 'Deploy to Heroku (capture-website-api)'
       uses: akhileshns/heroku-deploy@v3.8.8
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: 'capture-website-api'
-          heroku_email: 'robvanderleek@gmail.com'
-          usedocker: true
+      with:
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_app_name: 'capture-website-api'
+        heroku_email: 'robvanderleek@gmail.com'
+        usedocker: true
 
     - name: 'Deploy to Heroku'
       uses: akhileshns/heroku-deploy@v3.8.8
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: 'capture-website-api-patching'
-          heroku_email: 'robvanderleek@gmail.com'
+      with:
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_app_name: 'capture-website-api-patching'
+        heroku_email: 'robvanderleek@gmail.com'
 
   merge_me:
     name: 'Auto-merge dependabot PRs'
