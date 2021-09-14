@@ -1,4 +1,4 @@
-FROM node:13-slim
+FROM node:15-slim
 RUN apt-get update && apt-get install --no-install-recommends -yq \
     libgconf-2-4 libxss1 libxtst6 ca-certificates wget curl gnupg2 python
 ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE 1
