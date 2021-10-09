@@ -1,5 +1,5 @@
-const captureWebsite = require('capture-website');
-const puppeteer = require('puppeteer');
+import captureWebsite from 'capture-website';
+import puppeteer from 'puppeteer';
 
 const DEFAULT_TIMEOUT_SECONDS = 10;
 
@@ -9,7 +9,7 @@ const latest = {
     date: undefined
 };
 
-function showResults() {
+export function showResults() {
     const showResults = process.env.SHOW_RESULTS;
     return showResults && showResults === 'true';
 }
@@ -37,7 +37,7 @@ async function setViewport(page, options) {
     }
 }
 
-function validRequest(req) {
+export function validRequest(req) {
     const secret = process.env.SECRET;
     if (!secret) {
         return true;
@@ -48,7 +48,7 @@ function validRequest(req) {
     return req.query.secret === secret;
 }
 
-async function capture(req, res) {
+export async function capture(req, res) {
     if (!validRequest(req)) {
         res.status(403).send('Go away please');
         return;
@@ -103,14 +103,14 @@ async function tryWithPuppeteer(url, queryParams, res) {
     }
 }
 
-function getResponseType(queryParams) {
+export function getResponseType(queryParams) {
     if (queryParams.type && queryParams.type === 'jpeg') {
         return 'jpg';
     }
     return 'png';
 }
 
-function fieldValuesToNumber(obj, ...fields) {
+export function fieldValuesToNumber(obj, ...fields) {
     fields.forEach(f => {
         if (obj[f]) {
             const val = Number(obj[f]);
@@ -119,7 +119,7 @@ function fieldValuesToNumber(obj, ...fields) {
     });
 }
 
-function latestCapturePage(req, res) {
+export function latestCapturePage(req, res) {
     let page = '';
     page += '<html lang="en">\n';
     page += '<body>\n';
@@ -135,17 +135,7 @@ function latestCapturePage(req, res) {
     res.send(page);
 }
 
-function latestCapture(req, res) {
+export function latestCapture(req, res) {
     res.type('png');
     res.send(latest.capture);
 }
-
-module.exports = {
-    showResults: showResults,
-    validRequest: validRequest,
-    latestCapture: latestCapture,
-    capture: capture,
-    latestCapturePage: latestCapturePage,
-    fieldValuesToNumber: fieldValuesToNumber,
-    getResponseType: getResponseType
-};
