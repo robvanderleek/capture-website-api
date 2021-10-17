@@ -1,8 +1,8 @@
-name: Prod
+name: CICD
 on: 
   push:
     branches:
-      - master
+      - main
 jobs:
   cicd:
     runs-on: ubuntu-latest
@@ -58,14 +58,3 @@ jobs:
         heroku_app_name: 'capture-website-api-patching'
         heroku_email: 'robvanderleek@gmail.com'
         usedocker: true
-
-  merge_me:
-    name: 'Auto-merge dependabot PRs'
-    needs: cicd
-    runs-on: ubuntu-latest
-    steps:
-      - name: 'Merge dependabot PR branch'
-        uses: ridedott/merge-me-action@master
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_LOGIN: dependabot[bot]

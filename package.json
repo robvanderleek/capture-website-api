@@ -11,15 +11,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/express": "^4.17.9",
+    "@types/express": "^4.17.13",
     "capture-website": "^1.2.7",
     "express": "^4.17.1",
-    "puppeteer": "^5.5.0"
+    "puppeteer": "^10.4.0"
   },
   "devDependencies": {
-    "@types/jest": "^26.0.19",
-    "@types/node": "^14.14.16",
-    "jest": "^26.6.3",
-    "nodemon": "^2.0.6"
+    "@types/jest": "^27.0.2",
+    "@types/node": "^16.11.1",
+    "jest": "^27.2.5",
+    "nodemon": "^2.0.13"
   }
 }
