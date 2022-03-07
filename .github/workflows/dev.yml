@@ -1,4 +1,4 @@
-name: cicd-dev
+name: CICD-DEV
 on: 
   push:
     branches-ignore:
@@ -36,3 +36,11 @@ jobs:
         file: ./Dockerfile
         push: false
         tags: robvanderleek/capture-website-api:latest
+
+    - name: 'Deploy to Heroku'
+      uses: akhileshns/heroku-deploy@v3.8.8
+      with:
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_app_name: 'capture-website-api-staging'
+        heroku_email: 'robvanderleek@gmail.com'
+        usedocker: true

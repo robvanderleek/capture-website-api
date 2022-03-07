@@ -1,7 +1,7 @@
 import captureWebsite from 'capture-website';
 import puppeteer from 'puppeteer';
 
-const DEFAULT_TIMEOUT_SECONDS = 10;
+const DEFAULT_TIMEOUT_SECONDS = 60;
 
 const latest = {
     capture: undefined,
@@ -54,7 +54,20 @@ export async function capture(req, res) {
         return;
     }
     latest.date = new Date();
-    const queryParams = req.query;
+    const queryParams = Object.keys(req.query).reduce((params, key) => {
+        const q = req.query[key];
+        let value = q;
+        try {
+            value = JSON.parse(q);
+        } catch {
+            value = q
+        }
+        return {
+            ...params,
+            [key]: value
+        }
+    }, req.query || {})
+    console.log({queryParams})
     const url = queryParams.url;
     latest.url = url;
     console.log('Capturing URL: ' + url + ' ...');
@@ -74,6 +87,7 @@ export async function capture(req, res) {
     }
     queryParams._browser = browser;
     fieldValuesToNumber(queryParams, 'width', 'height', 'quality', 'scaleFactor', 'timeout', 'delay', 'offset');
+    
     if (queryParams.plainPuppeteer === 'true') {
         await tryWithPuppeteer(url, queryParams, res);
     } else {
@@ -83,6 +97,7 @@ export async function capture(req, res) {
             const responseType = getResponseType(queryParams);
             res.type(responseType).send(buffer);
         } catch (e) {
+            console.log(e)
             console.info(`Capture website failed for URL: ${url}`);
             console.info('Retrying with plain Puppeteer...');
             await tryWithPuppeteer(url, queryParams, res);
