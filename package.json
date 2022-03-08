@@ -2,21 +2,23 @@
   "name": "capture-website-rest",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
+  "type": "module",
+  "exports": "./src/index.js",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "node ./src/index.js",
     "dev": "nodemon src/index.js",
-    "test": "jest"
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@types/express": "^4.17.13",
-    "capture-website": "^0.8.1",
+    "capture-website": "^2.1.0",
     "express": "^4.17.1",
-    "puppeteer": "^10.4.0"
+    "puppeteer": "^13.5.0"
   },
   "devDependencies": {
+    "@jest/globals": "^27.2.5",
     "@types/jest": "^27.0.2",
     "@types/node": "^16.11.1",
     "jest": "^27.2.5",
