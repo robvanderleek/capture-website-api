@@ -1,7 +1,7 @@
-const captureWebsite = require('capture-website');
-const puppeteer = require('puppeteer');
+import captureWebsite from 'capture-website';
+import puppeteer from 'puppeteer';
 
-const DEFAULT_TIMEOUT_SECONDS = 60;
+const DEFAULT_TIMEOUT_SECONDS = 20;
 
 const latest = {
     capture: undefined,
@@ -9,7 +9,7 @@ const latest = {
     date: undefined
 };
 
-function showResults() {
+export function showResults() {
     const showResults = process.env.SHOW_RESULTS;
     return showResults && showResults === 'true';
 }
@@ -37,7 +37,49 @@ async function setViewport(page, options) {
     }
 }
 
-function validRequest(req) {
+export async function capture(req, res) {
+    if (!validRequest(req)) {
+        res.status(403).send('Go away please');
+        return;
+    }
+    latest.date = new Date();
+    const queryParams = getQueryParameters(req);
+    const url = queryParams.url;
+    latest.url = url;
+    console.info('Capturing URL: ' + url + ' ...');
+    queryParams.launchOptions = {
+        // headless: false,
+        args: [
+            '--no-sandbox',
+            '--disable-setuid-sandbox',
+            '--hide-scrollbars',
+            '--mute-audio',
+            '--use-fake-ui-for-media-stream' // Pages that ask for webcam/microphone access
+        ]
+    };
+    if (!queryParams.timeout) {
+        queryParams.timeout = DEFAULT_TIMEOUT_SECONDS;
+    }
+    fieldValuesToNumber(queryParams, 'width', 'height', 'quality', 'scaleFactor', 'timeout', 'delay', 'offset');
+    if (queryParams.plainPuppeteer === 'true') {
+        await tryWithPuppeteer(url, queryParams, res);
+    } else {
+        try {
+            const buffer = await captureWebsite.buffer(url, queryParams);
+            console.info(`Successfully captured URL: ${url}`);
+            latest.capture = buffer;
+            const responseType = getResponseType(queryParams);
+            res.type(responseType).send(buffer);
+        } catch (e) {
+            console.error(e);
+            console.info(`Capture website failed for URL: ${url}`);
+            console.info('Retrying with plain Puppeteer...');
+            await tryWithPuppeteer(url, queryParams, res);
+        }
+    }
+}
+
+export function validRequest(req) {
     const secret = process.env.SECRET;
     if (!secret) {
         return true;
@@ -48,13 +90,8 @@ function validRequest(req) {
     return req.query.secret === secret;
 }
 
-async function capture(req, res) {
-    if (!validRequest(req)) {
-        res.status(403).send('Go away please');
-        return;
-    }
-    latest.date = new Date();
-    const queryParams = Object.keys(req.query).reduce((params, key) => {
+function getQueryParameters(req) {
+    return Object.keys(req.query).reduce((params, key) => {
         const q = req.query[key];
         let value = q;
         try {
@@ -66,44 +103,7 @@ async function capture(req, res) {
             ...params,
             [key]: value
         }
-    }, req.query || {})
-    console.log({queryParams})
-    const url = queryParams.url;
-    latest.url = url;
-    console.log('Capturing URL: ' + url + ' ...');
-    queryParams.launchOptions = {
-        // headless: false,
-        args: [
-            '--no-sandbox',
-            '--disable-setuid-sandbox',
-            '--hide-scrollbars',
-            '--mute-audio',
-            '--use-fake-ui-for-media-stream' // Pages that ask for webcam/microphone access
-        ]
-    };
-    const browser = await puppeteer.launch(queryParams.launchOptions);
-    if (!queryParams.timeout) {
-        queryParams.timeout = DEFAULT_TIMEOUT_SECONDS;
-    }
-    queryParams._browser = browser;
-    fieldValuesToNumber(queryParams, 'width', 'height', 'quality', 'scaleFactor', 'timeout', 'delay', 'offset');
-    
-    if (queryParams.plainPuppeteer === 'true') {
-        await tryWithPuppeteer(url, queryParams, res);
-    } else {
-        try {
-            const buffer = await captureWebsite.buffer(url, queryParams);
-            latest.capture = buffer;
-            const responseType = getResponseType(queryParams);
-            res.type(responseType).send(buffer);
-        } catch (e) {
-            console.log(e)
-            console.info(`Capture website failed for URL: ${url}`);
-            console.info('Retrying with plain Puppeteer...');
-            await tryWithPuppeteer(url, queryParams, res);
-        }
-    }
-    browser.close();
+    }, req.query || {});
 }
 
 async function tryWithPuppeteer(url, queryParams, res) {
@@ -118,14 +118,14 @@ async function tryWithPuppeteer(url, queryParams, res) {
     }
 }
 
-function getResponseType(queryParams) {
+export function getResponseType(queryParams) {
     if (queryParams.type && queryParams.type === 'jpeg') {
         return 'jpg';
     }
     return 'png';
 }
 
-function fieldValuesToNumber(obj, ...fields) {
+export function fieldValuesToNumber(obj, ...fields) {
     fields.forEach(f => {
         if (obj[f]) {
             const val = Number(obj[f]);
@@ -134,7 +134,7 @@ function fieldValuesToNumber(obj, ...fields) {
     });
 }
 
-function latestCapturePage(req, res) {
+export function latestCapturePage(req, res) {
     let page = '';
     page += '<html lang="en">\n';
     page += '<body>\n';
@@ -150,17 +150,7 @@ function latestCapturePage(req, res) {
     res.send(page);
 }
 
-function latestCapture(req, res) {
+export function latestCapture(req, res) {
     res.type('png');
     res.send(latest.capture);
 }
-
-module.exports = {
-    showResults: showResults,
-    validRequest: validRequest,
-    latestCapture: latestCapture,
-    capture: capture,
-    latestCapturePage: latestCapturePage,
-    fieldValuesToNumber: fieldValuesToNumber,
-    getResponseType: getResponseType
-};

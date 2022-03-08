@@ -12,7 +12,7 @@ Capture screenshots of websites as a (host it yourself) API. This project is a w
 
 Try it yourself (*but beware that your screenshot is visible on a public website and the request may fail due to high traffic. Read further how prevent this*):
 ```
-$ curl 'https://capture-website-api.herokuapp.com/capture?url=https://twitter.com' -o screenshot.png
+curl 'https://capture-website-api.herokuapp.com/capture?url=https://twitter.com' -o screenshot.png
 ```
 
 
@@ -20,14 +20,27 @@ $ curl 'https://capture-website-api.herokuapp.com/capture?url=https://twitter.co
 
 ## Docker
 
-Run pre-built container from Docker Hub:
+### Run pre-built container from Docker Hub
+
+1. Pull the image:
 ```
-$ docker pull robvanderleek/capture-website-api
-$ docker run -it -p 8080:8080 robvanderleek/capture-website-api
-$ curl 'localhost:8080/capture?url=https://news.ycombinator.com/' -o screenshot.png
+docker pull robvanderleek/capture-website-api
+```
+
+2. Start the container:
+
+```
+docker run -it -p 8080:8080 robvanderleek/capture-website-api
+```
+
+3. Make screenshot:
+
+```
+curl 'localhost:8080/capture?url=https://news.ycombinator.com/' -o screenshot.png
 ``` 
 
-Build the docker image and run it:
+### Build the docker image and run it
+
 ```
 $ git clone git@github.com:robvanderleek/capture-website-api.git
 $ cd capture-website-api

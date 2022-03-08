@@ -1,0 +1,46 @@
+name: CICD-DEV
+on: 
+  push:
+    branches-ignore:
+      - main
+jobs:
+  cicd:
+    runs-on: ubuntu-latest
+    env:
+      CI: true
+    steps:
+    - name: 'Checkout repository'
+      uses: actions/checkout@v1
+
+    - name: 'Setup NodeJS'
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14.x
+
+    - name: 'Install depenencies'
+      run: yarn install
+
+    - name: 'Run tests'
+      run: yarn test
+
+    - name: 'Set up QEMU'
+      uses: docker/setup-qemu-action@v1
+
+    - name: 'Set up Docker Buildx'
+      uses: docker/setup-buildx-action@v1
+
+    - name: 'Build Docker image'
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        file: ./Dockerfile
+        push: false
+        tags: robvanderleek/capture-website-api:latest
+
+    - name: 'Deploy to Heroku'
+      uses: akhileshns/heroku-deploy@v3.8.8
+      with:
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_app_name: 'capture-website-api-staging'
+        heroku_email: 'robvanderleek@gmail.com'
+        usedocker: true
