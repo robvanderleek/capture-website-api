@@ -1,6 +1,7 @@
 FROM node:16-slim
 RUN apt-get update && apt-get install --no-install-recommends -yq \
-    libgconf-2-4 libxss1 libxtst6 ca-certificates wget curl gnupg2 python
+    libgconf-2-4 libxss1 libxtst6 libxshmfence1 ca-certificates wget curl \
+    gnupg2 python
 ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE 1
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub |\
     apt-key add -
@@ -16,16 +17,17 @@ RUN mkdir -p /usr/share/fonts/emoji \
     && chmod -R +rx /usr/share/fonts/ \
     && fc-cache -fv
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
+RUN groupadd -r pptruser && useradd -r -g pptruser -G audio,video pptruser \
+    && mkdir -p /home/pptruser/Downloads \
+    && chown -R pptruser:pptruser /home/pptruser
 RUN mkdir /app
 COPY .profile.d /app/.profile.d
 COPY package.json yarn.lock app/
-COPY src app/src
 WORKDIR /app
 RUN yarn
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
-RUN groupadd -r pptruser && useradd -r -g pptruser -G audio,video pptruser \
-    && mkdir -p /home/pptruser/Downloads \
-    && chown -R pptruser:pptruser /home/pptruser \
-    && chown -R pptruser:pptruser /app
+RUN chown -R pptruser:pptruser /app
+COPY src src
+RUN chown -R pptruser:pptruser /app/src
 USER pptruser
 CMD yarn start

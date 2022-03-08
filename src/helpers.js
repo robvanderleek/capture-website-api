@@ -1,7 +1,7 @@
 import captureWebsite from 'capture-website';
 import puppeteer from 'puppeteer';
 
-const DEFAULT_TIMEOUT_SECONDS = 60;
+const DEFAULT_TIMEOUT_SECONDS = 20;
 
 const latest = {
     capture: undefined,
@@ -37,6 +37,48 @@ async function setViewport(page, options) {
     }
 }
 
+export async function capture(req, res) {
+    if (!validRequest(req)) {
+        res.status(403).send('Go away please');
+        return;
+    }
+    latest.date = new Date();
+    const queryParams = getQueryParameters(req);
+    const url = queryParams.url;
+    latest.url = url;
+    console.info('Capturing URL: ' + url + ' ...');
+    queryParams.launchOptions = {
+        // headless: false,
+        args: [
+            '--no-sandbox',
+            '--disable-setuid-sandbox',
+            '--hide-scrollbars',
+            '--mute-audio',
+            '--use-fake-ui-for-media-stream' // Pages that ask for webcam/microphone access
+        ]
+    };
+    if (!queryParams.timeout) {
+        queryParams.timeout = DEFAULT_TIMEOUT_SECONDS;
+    }
+    fieldValuesToNumber(queryParams, 'width', 'height', 'quality', 'scaleFactor', 'timeout', 'delay', 'offset');
+    if (queryParams.plainPuppeteer === 'true') {
+        await tryWithPuppeteer(url, queryParams, res);
+    } else {
+        try {
+            const buffer = await captureWebsite.buffer(url, queryParams);
+            console.info(`Successfully captured URL: ${url}`);
+            latest.capture = buffer;
+            const responseType = getResponseType(queryParams);
+            res.type(responseType).send(buffer);
+        } catch (e) {
+            console.error(e);
+            console.info(`Capture website failed for URL: ${url}`);
+            console.info('Retrying with plain Puppeteer...');
+            await tryWithPuppeteer(url, queryParams, res);
+        }
+    }
+}
+
 export function validRequest(req) {
     const secret = process.env.SECRET;
     if (!secret) {
@@ -48,13 +90,8 @@ export function validRequest(req) {
     return req.query.secret === secret;
 }
 
-export async function capture(req, res) {
-    if (!validRequest(req)) {
-        res.status(403).send('Go away please');
-        return;
-    }
-    latest.date = new Date();
-    const queryParams = Object.keys(req.query).reduce((params, key) => {
+function getQueryParameters(req) {
+    return Object.keys(req.query).reduce((params, key) => {
         const q = req.query[key];
         let value = q;
         try {
@@ -66,44 +103,7 @@ export async function capture(req, res) {
             ...params,
             [key]: value
         }
-    }, req.query || {})
-    console.log({queryParams})
-    const url = queryParams.url;
-    latest.url = url;
-    console.log('Capturing URL: ' + url + ' ...');
-    queryParams.launchOptions = {
-        // headless: false,
-        args: [
-            '--no-sandbox',
-            '--disable-setuid-sandbox',
-            '--hide-scrollbars',
-            '--mute-audio',
-            '--use-fake-ui-for-media-stream' // Pages that ask for webcam/microphone access
-        ]
-    };
-    const browser = await puppeteer.launch(queryParams.launchOptions);
-    if (!queryParams.timeout) {
-        queryParams.timeout = DEFAULT_TIMEOUT_SECONDS;
-    }
-    queryParams._browser = browser;
-    fieldValuesToNumber(queryParams, 'width', 'height', 'quality', 'scaleFactor', 'timeout', 'delay', 'offset');
-    
-    if (queryParams.plainPuppeteer === 'true') {
-        await tryWithPuppeteer(url, queryParams, res);
-    } else {
-        try {
-            const buffer = await captureWebsite.buffer(url, queryParams);
-            latest.capture = buffer;
-            const responseType = getResponseType(queryParams);
-            res.type(responseType).send(buffer);
-        } catch (e) {
-            console.log(e)
-            console.info(`Capture website failed for URL: ${url}`);
-            console.info('Retrying with plain Puppeteer...');
-            await tryWithPuppeteer(url, queryParams, res);
-        }
-    }
-    browser.close();
+    }, req.query || {});
 }
 
 async function tryWithPuppeteer(url, queryParams, res) {

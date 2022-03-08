@@ -1,5 +1,5 @@
-import {fieldValuesToNumber, getResponseType, latestCapturePage, showResults, validRequest} from "./helpers";
-import {jest} from '@jest/globals'
+import {capture, fieldValuesToNumber, getResponseType, latestCapturePage, showResults, validRequest} from "./helpers";
+import {expect, jest} from '@jest/globals'
 
 
 test('show results default off', () => {
@@ -32,7 +32,7 @@ test('all requests are invalid is secret is set and request contains no secret v
     expect(validRequest({})).toBeFalsy();
     expect(validRequest({query: {}})).toBeFalsy();
 
-    process.env.SECRET = undefined;
+    delete process.env.SECRET;
 });
 
 test('all requests are valid when secrets match', () => {
@@ -41,7 +41,7 @@ test('all requests are valid when secrets match', () => {
     expect(validRequest({query: {secret: 'world'}})).toBeFalsy();
     expect(validRequest({query: {secret: 'hello'}})).toBeTruthy();
 
-    process.env.SECRET = undefined;
+    delete process.env.SECRET;
 });
 
 test('field values to number', () => {
@@ -77,4 +77,25 @@ test('get response type', () => {
     expect(getResponseType({})).toBe('png');
     expect(getResponseType({type: 'jpeg'})).toBe('jpg');
     expect(getResponseType({type: 'png'})).toBe('png');
+});
+
+test('do real capture', async () => {
+    const req = {query: {url: 'https://robvanderleek.github.io'}};
+    let resultType = undefined;
+    let resultBuffer = undefined;
+    function type(t) {
+        resultType = t;
+
+        function send(buffer) {
+            resultBuffer = buffer;
+        }
+
+        return {send: send};
+    }
+    const res = {type: type};
+
+    await capture(req, res);
+
+    expect(resultType).toBe('png');
+    expect(resultBuffer).toBeDefined();
 });
