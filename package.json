@@ -15,7 +15,7 @@
     "@types/express": "^4.17.13",
     "capture-website": "^2.1.0",
     "express": "^4.17.1",
-    "puppeteer": "^10.4.0"
+    "puppeteer": "^13.5.1"
   },
   "devDependencies": {
     "@jest/globals": "^27.2.5",
