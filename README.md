@@ -28,36 +28,59 @@ docker pull robvanderleek/capture-website-api
 ```
 
 2. Start the container:
-
 ```
 docker run -it -p 8080:8080 robvanderleek/capture-website-api
 ```
 
-3. Make screenshot:
-
+3. Make screenshot request:
 ```
 curl 'localhost:8080/capture?url=https://news.ycombinator.com/' -o screenshot.png
 ``` 
 
 ### Build the docker image and run it
 
+1. Clone the repo:
 ```
-$ git clone git@github.com:robvanderleek/capture-website-api.git
-$ cd capture-website-api
-$ docker build -t cwa .
-$ docker run -it -p 8080:8080 cwa
-$ curl 'localhost:8080/capture?url=https://www.youtube.com' -o screenshot.png
+git clone git@github.com:robvanderleek/capture-website-api.git && cd capture-website-api
+```
+
+2. Build the image:
+```
+docker build -t cwa .
+```
+
+3. Start the container: 
+```
+docker run -it -p 8080:8080 cwa
+```
+
+4. Make screenshot request:
+```
+curl 'localhost:8080/capture?url=https://www.youtube.com' -o screenshot.png
 ```
 
 ## Yarn
 
 Run in a terminal:
+
+1. Clone the repo:
 ```
-$ git clone git@github.com:robvanderleek/capture-website-api.git
-$ cd capture-website-api
-$ yarn
-$ yarn start
-$ curl 'localhost:8080/capture?url=https://www.reddit.com' -o screenshot.png
+git clone git@github.com:robvanderleek/capture-website-api.git && cd capture-website-api
+```
+
+2. Install dependencies:
+```
+yarn
+```
+
+3. Start the server:
+```
+yarn start
+```
+
+4. Make screenshot request:
+```
+curl 'localhost:8080/capture?url=https://www.reddit.com' -o screenshot.png
 ```
 
 ## Heroku

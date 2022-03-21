@@ -1,7 +1,12 @@
 import captureWebsite from 'capture-website';
 import puppeteer from 'puppeteer';
+import PQueue from "p-queue";
 
 const DEFAULT_TIMEOUT_SECONDS = 20;
+const CONCURRENCY = 2;
+const MAX_QUEUE_LENGTH = 6;
+
+const queue = new PQueue({concurrency: CONCURRENCY});
 
 const latest = {
     capture: undefined,
@@ -14,53 +19,27 @@ export function showResults() {
     return showResults && showResults === 'true';
 }
 
-async function takePlainPuppeteerScreenshot(url, options) {
-    options.encoding = 'binary';
-    const browser = await puppeteer.launch(options.launchOptions);
-    const page = await browser.newPage();
-    await page.goto(url);
-    await new Promise(r => setTimeout(r, 3000));
-    await setViewport(page, options);
-    const buffer = await page.screenshot();
-    await browser.close();
-    return buffer;
-}
-
-async function setViewport(page, options) {
-    if (options.width && options.height) {
-        const viewportOptions = {
-            width: options.width,
-            height: options.height,
-            deviceScaleFactor: options.scaleFactor ? options.scaleFactor : 1
-        };
-        await page.setViewport(viewportOptions);
-    }
-}
-
 export async function capture(req, res) {
     if (!validRequest(req)) {
         res.status(403).send('Go away please');
         return;
     }
+    if (queue.size >= MAX_QUEUE_LENGTH) {
+        res.status(429).send('Maximum queue size reached, try again later');
+        return;
+    }
+    if (queue.pending >= CONCURRENCY) {
+        console.log('Queueing request...');
+    }
+    await queue.add(() => doCaptureWork(req, res));
+}
+
+async function doCaptureWork(req, res) {
     latest.date = new Date();
     const queryParams = getQueryParameters(req);
     const url = queryParams.url;
     latest.url = url;
     console.info('Capturing URL: ' + url + ' ...');
-    queryParams.launchOptions = {
-        // headless: false,
-        args: [
-            '--no-sandbox',
-            '--disable-setuid-sandbox',
-            '--hide-scrollbars',
-            '--mute-audio',
-            '--use-fake-ui-for-media-stream' // Pages that ask for webcam/microphone access
-        ]
-    };
-    if (!queryParams.timeout) {
-        queryParams.timeout = DEFAULT_TIMEOUT_SECONDS;
-    }
-    fieldValuesToNumber(queryParams, 'width', 'height', 'quality', 'scaleFactor', 'timeout', 'delay', 'offset');
     if (queryParams.plainPuppeteer === 'true') {
         await tryWithPuppeteer(url, queryParams, res);
     } else {
@@ -91,9 +70,28 @@ export function validRequest(req) {
 }
 
 function getQueryParameters(req) {
+    const result = getQueryParametersFromUrl(req);
+    result.launchOptions = {
+        // headless: false,
+        args: [
+            '--no-sandbox',
+            '--disable-setuid-sandbox',
+            '--hide-scrollbars',
+            '--mute-audio',
+            '--use-fake-ui-for-media-stream' // Pages that ask for webcam/microphone access
+        ]
+    };
+    if (!result.timeout) {
+        result.timeout = DEFAULT_TIMEOUT_SECONDS;
+    }
+    fieldValuesToNumber(result, 'width', 'height', 'quality', 'scaleFactor', 'timeout', 'delay', 'offset');
+    return result;
+}
+
+function getQueryParametersFromUrl(req) {
     return Object.keys(req.query).reduce((params, key) => {
         const q = req.query[key];
-        let value = q;
+        let value;
         try {
             value = JSON.parse(q);
         } catch {
@@ -109,12 +107,36 @@ function getQueryParameters(req) {
 async function tryWithPuppeteer(url, queryParams, res) {
     try {
         const buffer = await takePlainPuppeteerScreenshot(url, queryParams);
+        console.info(`Successfully captured URL: ${url}`);
         latest.capture = buffer;
         const responseType = getResponseType(queryParams);
         res.type(responseType).send(buffer);
     } catch (e) {
         console.log('Capture failed due to: ' + e.message);
         res.status(500).send(e.message);
+    }
+}
+
+async function takePlainPuppeteerScreenshot(url, options) {
+    options.encoding = 'binary';
+    const browser = await puppeteer.launch(options.launchOptions);
+    const page = await browser.newPage();
+    await page.goto(url);
+    await new Promise(r => setTimeout(r, 3000));
+    await setViewport(page, options);
+    const buffer = await page.screenshot();
+    await browser.close();
+    return buffer;
+}
+
+async function setViewport(page, options) {
+    if (options.width && options.height) {
+        const viewportOptions = {
+            width: options.width,
+            height: options.height,
+            deviceScaleFactor: options.scaleFactor ? options.scaleFactor : 1
+        };
+        await page.setViewport(viewportOptions);
     }
 }
 
@@ -140,8 +162,9 @@ export function latestCapturePage(req, res) {
     page += '<body>\n';
     page += '<h1>Latest capture</h1>';
     if (latest.capture) {
+        const latestEndpoint = '/latest';
         page += '<p>Date: ' + latest.date + '</p>\n';
-        page += '<img src="/latest" width="800"  alt="Latest capture"/>\n';
+        page += `<img src="${latestEndpoint}" width="800"  alt="Latest capture"/>\n`;
     } else {
         page += '<p>No capture found!</p>\n';
     }
