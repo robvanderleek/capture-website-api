@@ -1,12 +1,10 @@
 import captureWebsite from 'capture-website';
 import puppeteer from 'puppeteer';
 import PQueue from "p-queue";
+import {getConcurrency, getDefaultTimeoutSeconds, getMaxQueueLength, getSecret, getShowResults} from "./config.js";
+import 'dotenv/config';
 
-const DEFAULT_TIMEOUT_SECONDS = 20;
-const CONCURRENCY = 2;
-const MAX_QUEUE_LENGTH = 6;
-
-const queue = new PQueue({concurrency: CONCURRENCY});
+const queue = new PQueue({concurrency: getConcurrency()});
 
 const latest = {
     capture: undefined,
@@ -15,7 +13,7 @@ const latest = {
 };
 
 export function showResults() {
-    const showResults = process.env.SHOW_RESULTS;
+    const showResults = getShowResults();
     return showResults && showResults === 'true';
 }
 
@@ -24,11 +22,11 @@ export async function capture(req, res) {
         res.status(403).send('Go away please');
         return;
     }
-    if (queue.size >= MAX_QUEUE_LENGTH) {
+    if (queue.size >= getMaxQueueLength()) {
         res.status(429).send('Maximum queue size reached, try again later');
         return;
     }
-    if (queue.pending >= CONCURRENCY) {
+    if (queue.pending >= getConcurrency()) {
         console.log('Queueing request...');
     }
     await queue.add(() => doCaptureWork(req, res));
@@ -59,7 +57,7 @@ async function doCaptureWork(req, res) {
 }
 
 export function validRequest(req) {
-    const secret = process.env.SECRET;
+    const secret = getSecret();
     if (!secret) {
         return true;
     }
@@ -82,7 +80,7 @@ function getQueryParameters(req) {
         ]
     };
     if (!result.timeout) {
-        result.timeout = DEFAULT_TIMEOUT_SECONDS;
+        result.timeout = getDefaultTimeoutSeconds();
     }
     fieldValuesToNumber(result, 'width', 'height', 'quality', 'scaleFactor', 'timeout', 'delay', 'offset');
     return result;
