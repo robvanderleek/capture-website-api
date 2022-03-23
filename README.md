@@ -135,16 +135,14 @@ Simple as that.
 ## Application options
 
 Application configuration options can be set as environment veriables or in 
-a `.env` file in the root folder.
-
-There's an example `.env` file in the codebase: [`.env.example`](https://github.com/robvanderleek/capture-website-api/blob/main/.env.example)
+a `.env` file in the root folder. There's an example `.env` file in the codebase: [`.env.example`](https://github.com/robvanderleek/capture-website-api/blob/main/.env.example)
 
 Supported options are:
 
 | Name | Descrition | Default |
 |---|---|---|
 | TIMEOUT | Timeout in seconds for loading a web page | 20 |
-| CONCURRENCY | Number of captures that run in parallel, more memory allows more captures to run in parallel |
+| CONCURRENCY | Number of captures that run in parallel, more memory allows more captures to run in parallel | 2 |
 | MAX_QUEUE_LENGTH | Requests that can't be handled directly are queued until the queue is full | 6 |
 | SHOW_RESULTS | Enable web endpoint to show latest capture | false |
 | SECRET | Secret string to prevent undesired usage on public endpoints | "" |
