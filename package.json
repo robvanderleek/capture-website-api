@@ -22,7 +22,7 @@
   "devDependencies": {
     "@jest/globals": "^27.2.5",
     "@types/jest": "^27.0.2",
-    "@types/node": "^17.0.24",
+    "@types/node": "^17.0.26",
     "jest": "^27.2.5",
     "nodemon": "^2.0.13"
   }
