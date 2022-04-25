@@ -17,7 +17,7 @@
     "dotenv": "^16.0.0",
     "express": "^4.17.1",
     "p-queue": "^7.2.0",
-    "puppeteer": "^13.5.2"
+    "puppeteer": "^13.6.0"
   },
   "devDependencies": {
     "@jest/globals": "^27.2.5",
