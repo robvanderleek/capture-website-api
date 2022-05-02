@@ -20,7 +20,7 @@
     "puppeteer": "^13.7.0"
   },
   "devDependencies": {
-    "@jest/globals": "^27.2.5",
+    "@jest/globals": "^28.0.3",
     "@types/jest": "^27.0.2",
     "@types/node": "^17.0.31",
     "jest": "^28.0.3",
