@@ -1286,10 +1286,10 @@ caniuse-lite@^1.0.30001332:
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001334.tgz#892e9965b35285033fc2b8a8eff499fe02f13d8b"
   integrity sha512-kbaCEBRRVSoeNs74sCuq92MJyGrMtjWVfhltoHUCW4t4pXFvGjUBrfo47weBRViHkiV3eBYyIsfl956NtHGazw==
 
-capture-website@^2.1.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/capture-website/-/capture-website-2.3.0.tgz#3041de9eb0dac172f646cce3deb6f7dca435050d"
-  integrity sha512-HXCUqloLK//3SuoEVPFnSn6gA7ASVLZ4AToNnulLp4/YHQWQZxPFURrQjrLDeMtFsK3f8yN7gPaZZfM4xk50/g==
+capture-website@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/capture-website/-/capture-website-2.4.0.tgz#b8621669480253fe70276aad055ffbaf667339ba"
+  integrity sha512-a97y3R0YEy7tCvHSBARFZS4Ood13mFcYuQIDTapHeCsLl7/qBtNa0yKnUsZfoxBzRwFOB7ib0hzCje1WhWb7zQ==
   dependencies:
     "@cliqz/adblocker-puppeteer" "^1.23.2"
     file-url "^4.0.0"
