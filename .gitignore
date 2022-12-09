@@ -1,7 +1,7 @@
 .idea/
 .env
-node_modules/
-test/*.png
+**/node_modules/
+**/test/*.png
 
 # Local Netlify folder
-.netlify
+serverless/.netlify
