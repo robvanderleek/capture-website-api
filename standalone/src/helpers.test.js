@@ -1,4 +1,11 @@
-import {capture, fieldValuesToNumber, getResponseType, latestCapturePage, showResults, validRequest} from "./helpers";
+import {
+    doCaptureWork,
+    fieldValuesToNumber,
+    getResponseType,
+    latestCapturePage,
+    showResults,
+    allowedRequest
+} from "./helpers";
 import {expect, jest} from '@jest/globals'
 
 
@@ -22,24 +29,24 @@ test('generate homepage', () => {
     expect(res.send).toBeCalledTimes(1);
 });
 
-test('all requests are valid by default', () => {
-    expect(validRequest({})).toBeTruthy();
+test('all requests are allowed by default', () => {
+    expect(allowedRequest({})).toBeTruthy();
 });
 
-test('all requests are invalid is secret is set and request contains no secret value', () => {
+test('all requests are rejected if secret is set and request contains no secret value', () => {
     process.env.SECRET = 'hello';
 
-    expect(validRequest({})).toBeFalsy();
-    expect(validRequest({query: {}})).toBeFalsy();
+    expect(allowedRequest({})).toBeFalsy();
+    expect(allowedRequest({query: {}})).toBeFalsy();
 
     delete process.env.SECRET;
 });
 
-test('all requests are valid when secrets match', () => {
+test('all requests are allowed when secrets match', () => {
     process.env.SECRET = 'hello';
 
-    expect(validRequest({query: {secret: 'world'}})).toBeFalsy();
-    expect(validRequest({query: {secret: 'hello'}})).toBeTruthy();
+    expect(allowedRequest({secret: 'world'})).toBeFalsy();
+    expect(allowedRequest({secret: 'hello'})).toBeTruthy();
 
     delete process.env.SECRET;
 });
@@ -80,9 +87,10 @@ test('get response type', () => {
 });
 
 test('do real capture', async () => {
-    const req = {query: {url: 'https://robvanderleek.github.io'}};
+    const queryParameters = {url: 'https://robvanderleek.github.io'};
     let resultType = undefined;
     let resultBuffer = undefined;
+
     function type(t) {
         resultType = t;
 
@@ -92,9 +100,11 @@ test('do real capture', async () => {
 
         return {send: send};
     }
+
     const res = {type: type};
 
-    await capture(req, res);
+    const result = await doCaptureWork(queryParameters);
+    res.type(result.responseType).send(result.buffer);
 
     expect(resultType).toBe('png');
     expect(resultBuffer).toBeDefined();
