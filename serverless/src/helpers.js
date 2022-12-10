@@ -1,4 +1,4 @@
-const {getDefaultTimeoutSeconds, getSecret} = require('./config.js');
+const {getSecret} = require('./config.js');
 const puppeteer = require('puppeteer-core');
 const chromium = require('chrome-aws-lambda');
 
@@ -34,9 +34,6 @@ async function getOptions(queryParameters) {
         ],
         executablePath: process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath,
     };
-    if (!result.timeout) {
-        result.timeout = getDefaultTimeoutSeconds();
-    }
     fieldValuesToNumber(result, 'width', 'height', 'quality', 'scaleFactor', 'timeout', 'delay', 'offset');
     return result;
 }
@@ -80,7 +77,7 @@ async function takePlainPuppeteerScreenshot(url, options) {
     const browser = await puppeteer.launch(options.launchOptions);
     const page = await browser.newPage();
     await page.goto(url);
-    await new Promise(r => setTimeout(r, 1500));
+    await new Promise(r => setTimeout(r, 300));
     await setViewport(page, options);
     const buffer = await page.screenshot();
     await browser.close();
