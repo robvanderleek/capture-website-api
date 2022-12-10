@@ -1,4 +1,5 @@
 import {getDefaultTimeoutSeconds, getSecret} from "./config.js";
+import puppeteer from "puppeteer-core";
 
 // export async function doCaptureWork(queryParameters) {
 //     const options = await getOptions(queryParameters);
@@ -54,37 +55,37 @@ function parseQueryParameters(queryParameters) {
         }
     }, queryParameters || {});
 }
-//
-// async function tryWithPuppeteer(url, options) {
-//     try {
-//         const buffer = await takePlainPuppeteerScreenshot(url, options);
-//         console.info(`Successfully captured URL: ${url}`);
-//         return {
-//             statusCode: 200,
-//             responseType: getResponseType(options),
-//             buffer: buffer
-//         }
-//     } catch (e) {
-//         console.log('Capture failed due to: ' + e.message);
-//         return {
-//             statusCode: 500,
-//             message: e.message
-//         }
-//     }
-// }
-//
-// async function takePlainPuppeteerScreenshot(url, options) {
-//     options.encoding = 'binary';
-//     const browser = await puppeteer.launch(options.launchOptions);
-//     const page = await browser.newPage();
-//     await page.goto(url);
-//     await new Promise(r => setTimeout(r, 3000));
-//     await setViewport(page, options);
-//     const buffer = await page.screenshot();
-//     await browser.close();
-//     return buffer;
-// }
-//
+
+async function tryWithPuppeteer(url, options) {
+    try {
+        const buffer = await takePlainPuppeteerScreenshot(url, options);
+        console.info(`Successfully captured URL: ${url}`);
+        return {
+            statusCode: 200,
+            responseType: getResponseType(options),
+            buffer: buffer
+        }
+    } catch (e) {
+        console.log('Capture failed due to: ' + e.message);
+        return {
+            statusCode: 500,
+            message: e.message
+        }
+    }
+}
+
+async function takePlainPuppeteerScreenshot(url, options) {
+    options.encoding = 'binary';
+    const browser = await puppeteer.launch(options.launchOptions);
+    const page = await browser.newPage();
+    await page.goto(url);
+    await new Promise(r => setTimeout(r, 3000));
+    await setViewport(page, options);
+    const buffer = await page.screenshot();
+    await browser.close();
+    return buffer;
+}
+
 async function setViewport(page, options) {
     if (options.width && options.height) {
         const viewportOptions = {
