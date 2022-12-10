@@ -1,5 +1,5 @@
-import {allowedRequest, fieldValuesToNumber, getResponseType} from "./helpers";
-import {expect} from '@jest/globals'
+const {allowedRequest, fieldValuesToNumber, getResponseType} = require("./helpers");
+const {expect} = require('@jest/globals');
 
 test('all requests are allowed by default', () => {
     expect(allowedRequest({})).toBeTruthy();
