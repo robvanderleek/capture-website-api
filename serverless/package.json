@@ -13,7 +13,7 @@
     "@netlify/functions": "^1.3.0",
     "chrome-aws-lambda": "^10.1.0",
     "dotenv": "^16.0.3",
-    "puppeteer-core": "^19.4.0"
+    "puppeteer-core": "^10.1.0"
   },
   "devDependencies": {
     "@jest/globals": "^28.1.3",
