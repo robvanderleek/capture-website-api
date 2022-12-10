@@ -8,12 +8,15 @@ jobs:
     runs-on: ubuntu-latest
     env:
       CI: true
+    defaults:
+      run:
+        working-directory: standalone
     steps:
     - name: 'Checkout repository'
-      uses: actions/checkout@v1
+      uses: actions/checkout
 
     - name: 'Setup NodeJS'
-      uses: actions/setup-node@v1
+      uses: actions/setup-node
       with:
         node-version: 14.x
 
@@ -32,7 +35,7 @@ jobs:
     - name: 'Build Docker image'
       uses: docker/build-push-action@v2
       with:
-        context: .
+        context: standalone
         file: ./Dockerfile
         push: false
         tags: robvanderleek/capture-website-api:latest
