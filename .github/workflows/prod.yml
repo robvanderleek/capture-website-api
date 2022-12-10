@@ -1,4 +1,4 @@
-name: CICD
+name: 'CICD'
 on: 
   push:
     branches:
@@ -42,7 +42,7 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         context: ./standalone/
-        file: Dockerfile
+        file: ./standalone/Dockerfile
         push: true
         tags: robvanderleek/capture-website-api:latest
 
