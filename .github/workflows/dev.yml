@@ -35,8 +35,8 @@ jobs:
     - name: 'Build Docker image'
       uses: docker/build-push-action@v2
       with:
-        context: standalone
-        file: ./Dockerfile
+        context: ./standalone/
+        file: Dockerfile
         push: false
         tags: robvanderleek/capture-website-api:latest
 
