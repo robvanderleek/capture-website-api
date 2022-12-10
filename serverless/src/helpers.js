@@ -85,29 +85,29 @@ export function allowedRequest(queryParameters) {
 //     return buffer;
 // }
 //
-// async function setViewport(page, options) {
-//     if (options.width && options.height) {
-//         const viewportOptions = {
-//             width: options.width,
-//             height: options.height,
-//             deviceScaleFactor: options.scaleFactor ? options.scaleFactor : 1
-//         };
-//         await page.setViewport(viewportOptions);
-//     }
-// }
-//
-// export function getResponseType(queryParams) {
-//     if (queryParams.type && queryParams.type === 'jpeg') {
-//         return 'jpg';
-//     }
-//     return 'png';
-// }
-//
-// export function fieldValuesToNumber(obj, ...fields) {
-//     fields.forEach(f => {
-//         if (obj[f]) {
-//             const val = Number(obj[f]);
-//             obj[f] = Number.isNaN(val) ? obj[f] : val;
-//         }
-//     });
-// }
+async function setViewport(page, options) {
+    if (options.width && options.height) {
+        const viewportOptions = {
+            width: options.width,
+            height: options.height,
+            deviceScaleFactor: options.scaleFactor ? options.scaleFactor : 1
+        };
+        await page.setViewport(viewportOptions);
+    }
+}
+
+export function getResponseType(queryParams) {
+    if (queryParams.type && queryParams.type === 'jpeg') {
+        return 'jpg';
+    }
+    return 'png';
+}
+
+export function fieldValuesToNumber(obj, ...fields) {
+    fields.forEach(f => {
+        if (obj[f]) {
+            const val = Number(obj[f]);
+            obj[f] = Number.isNaN(val) ? obj[f] : val;
+        }
+    });
+}
