@@ -1,2 +1,7 @@
-export const getDefaultTimeoutSeconds = () => parseInt(process.env.TIMEOUT) || 10;
-export const getSecret = () => process.env.SECRET;
+const getDefaultTimeoutSeconds = () => parseInt(process.env.TIMEOUT) || 10;
+const getSecret = () => process.env.SECRET;
+
+module.exports = {
+    getDefaultTimeoutSeconds: getDefaultTimeoutSeconds,
+    getSecret: getSecret
+}

@@ -1,5 +1,5 @@
-import {getDefaultTimeoutSeconds, getSecret} from "./config.js";
-import puppeteer from "puppeteer-core";
+const {getDefaultTimeoutSeconds, getSecret} = require('./config.js');
+const puppeteer = require('puppeteer-core');
 
 // export async function doCaptureWork(queryParameters) {
 //     const options = await getOptions(queryParameters);
@@ -8,7 +8,7 @@ import puppeteer from "puppeteer-core";
 //     return await tryWithPuppeteer(url, options);
 // }
 
-export function allowedRequest(queryParameters) {
+function allowedRequest(queryParameters) {
     const secret = getSecret();
     if (!secret) {
         return true;
@@ -97,18 +97,24 @@ async function setViewport(page, options) {
     }
 }
 
-export function getResponseType(queryParams) {
+function getResponseType(queryParams) {
     if (queryParams.type && queryParams.type === 'jpeg') {
         return 'jpg';
     }
     return 'png';
 }
 
-export function fieldValuesToNumber(obj, ...fields) {
+function fieldValuesToNumber(obj, ...fields) {
     fields.forEach(f => {
         if (obj[f]) {
             const val = Number(obj[f]);
             obj[f] = Number.isNaN(val) ? obj[f] : val;
         }
     });
+}
+
+module.exports = {
+    allowedRequest: allowedRequest,
+    getResponseType: getResponseType,
+    fieldValuesToNumber: fieldValuesToNumber
 }

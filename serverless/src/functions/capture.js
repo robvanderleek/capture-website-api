@@ -1,6 +1,6 @@
-import {allowedRequest} from "../helpers.js";
+const {allowedRequest} = require('../helpers.js');
 
-export const handler = async function (event, _) {
+const handler = async function (event, _) {
     if (!allowedRequest(event.queryStringParameters)) {
         return {
             statusCode: 403,
@@ -27,4 +27,8 @@ export const handler = async function (event, _) {
         statusCode: 200,
         body: JSON.stringify({message: 'Hello world, this is a test'})
     };
+}
+
+module.exports = {
+    handler: handler
 }

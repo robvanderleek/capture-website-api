@@ -2,7 +2,6 @@
   "name": "capture-website-api-serverless",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
   "exports": "./src/index.js",
   "scripts": {
     "dev": "netlify dev",
