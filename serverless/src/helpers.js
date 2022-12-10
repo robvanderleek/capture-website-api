@@ -80,7 +80,7 @@ async function takePlainPuppeteerScreenshot(url, options) {
     const browser = await puppeteer.launch(options.launchOptions);
     const page = await browser.newPage();
     await page.goto(url);
-    await new Promise(r => setTimeout(r, 3000));
+    await new Promise(r => setTimeout(r, 1500));
     await setViewport(page, options);
     const buffer = await page.screenshot();
     await browser.close();
