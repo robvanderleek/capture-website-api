@@ -74,7 +74,7 @@ async function tryWithPuppeteer(url, options) {
 
 async function takePlainPuppeteerScreenshot(url, options) {
     options.encoding = 'binary';
-    const browser = await puppeteer.launch(options.launchOptions);
+    const browser = await chromium.puppeteer.launch(options.launchOptions);
     const page = await browser.newPage();
     await page.goto(url);
     await new Promise(r => setTimeout(r, 300));
