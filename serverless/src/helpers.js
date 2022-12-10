@@ -1,4 +1,5 @@
 import {getDefaultTimeoutSeconds, getSecret} from "./config.js";
+import * as chromium from "puppeteer-core";
 
 // export async function doCaptureWork(queryParameters) {
 //     const options = await getOptions(queryParameters);
@@ -18,42 +19,42 @@ export function allowedRequest(queryParameters) {
     return queryParameters.secret === secret;
 }
 
-// async function getOptions(queryParameters) {
-//     const result = parseQueryParameters(queryParameters);
-//     result.launchOptions = {
-//         headless: true,
-//         args: [
-//             ...chromium.args,
-//             '--no-sandbox',
-//             '--disable-setuid-sandbox',
-//             '--hide-scrollbars',
-//             '--mute-audio',
-//             '--use-fake-ui-for-media-stream' // Pages that ask for webcam/microphone access
-//         ],
-//         executablePath: process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath,
-//     };
-//     if (!result.timeout) {
-//         result.timeout = getDefaultTimeoutSeconds();
-//     }
-//     fieldValuesToNumber(result, 'width', 'height', 'quality', 'scaleFactor', 'timeout', 'delay', 'offset');
-//     return result;
-// }
-//
-// function parseQueryParameters(queryParameters) {
-//     return Object.keys(queryParameters).reduce((params, key) => {
-//         const q = queryParameters[key];
-//         let value;
-//         try {
-//             value = JSON.parse(q);
-//         } catch {
-//             value = q
-//         }
-//         return {
-//             ...params,
-//             [key]: value
-//         }
-//     }, queryParameters || {});
-// }
+async function getOptions(queryParameters) {
+    const result = parseQueryParameters(queryParameters);
+    result.launchOptions = {
+        headless: true,
+        args: [
+            ...chromium.args,
+            '--no-sandbox',
+            '--disable-setuid-sandbox',
+            '--hide-scrollbars',
+            '--mute-audio',
+            '--use-fake-ui-for-media-stream' // Pages that ask for webcam/microphone access
+        ],
+        executablePath: process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath,
+    };
+    if (!result.timeout) {
+        result.timeout = getDefaultTimeoutSeconds();
+    }
+    fieldValuesToNumber(result, 'width', 'height', 'quality', 'scaleFactor', 'timeout', 'delay', 'offset');
+    return result;
+}
+
+function parseQueryParameters(queryParameters) {
+    return Object.keys(queryParameters).reduce((params, key) => {
+        const q = queryParameters[key];
+        let value;
+        try {
+            value = JSON.parse(q);
+        } catch {
+            value = q
+        }
+        return {
+            ...params,
+            [key]: value
+        }
+    }, queryParameters || {});
+}
 //
 // async function tryWithPuppeteer(url, options) {
 //     try {
