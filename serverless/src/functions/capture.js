@@ -1,10 +1,12 @@
+import {allowedRequest} from "../helpers.js";
+
 export const handler = async function (event, _) {
-    // if (!allowedRequest(event.queryStringParameters)) {
-    //     return {
-    //         statusCode: 403,
-    //         body: JSON.stringify({message: 'Go away please'})
-    //     };
-    // }
+    if (!allowedRequest(event.queryStringParameters)) {
+        return {
+            statusCode: 403,
+            body: JSON.stringify({message: 'Go away please'})
+        };
+    }
     // const result = await doCaptureWork(event.queryStringParameters);
     // if (result.statusCode === 200) {
     //     return {
