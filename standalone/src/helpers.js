@@ -1,10 +1,10 @@
 import captureWebsite from 'capture-website';
 import puppeteer from 'puppeteer';
 import PQueue from "p-queue";
-import {getConcurrency, getDefaultTimeoutSeconds, getMaxQueueLength, getSecret, getShowResults} from "./config.js";
+import {getConcurrency, getDefaultTimeoutSeconds, getSecret, getShowResults} from "./config.js";
 import 'dotenv/config';
 
-const queue = new PQueue({concurrency: getConcurrency()});
+export const queue = new PQueue({concurrency: getConcurrency()});
 
 const latest = {
     capture: undefined,
@@ -17,58 +17,46 @@ export function showResults() {
     return showResults && showResults === 'true';
 }
 
-export async function capture(req, res) {
-    if (!validRequest(req)) {
-        res.status(403).send('Go away please');
-        return;
-    }
-    if (queue.size >= getMaxQueueLength()) {
-        res.status(429).send('Maximum queue size reached, try again later');
-        return;
-    }
-    if (queue.pending >= getConcurrency()) {
-        console.log('Queueing request...');
-    }
-    await queue.add(() => doCaptureWork(req, res));
-}
-
-async function doCaptureWork(req, res) {
+export async function doCaptureWork(queryParameters) {
     latest.date = new Date();
-    const queryParams = getQueryParameters(req);
-    const url = queryParams.url;
+    const options = getOptions(queryParameters);
+    const url = options.url;
     latest.url = url;
     console.info('Capturing URL: ' + url + ' ...');
-    if (queryParams.plainPuppeteer === 'true') {
-        await tryWithPuppeteer(url, queryParams, res);
+    if (options.plainPuppeteer === 'true') {
+        return await tryWithPuppeteer(url, options);
     } else {
         try {
-            const buffer = await captureWebsite.buffer(url, queryParams);
+            const buffer = await captureWebsite.buffer(url, options);
             console.info(`Successfully captured URL: ${url}`);
             latest.capture = buffer;
-            const responseType = getResponseType(queryParams);
-            res.type(responseType).send(buffer);
+            return {
+                statusCode: 200,
+                responseType: getResponseType(options),
+                buffer: buffer
+            }
         } catch (e) {
             console.error(e);
             console.info(`Capture website failed for URL: ${url}`);
             console.info('Retrying with plain Puppeteer...');
-            await tryWithPuppeteer(url, queryParams, res);
+            return await tryWithPuppeteer(url, options);
         }
     }
 }
 
-export function validRequest(req) {
+export function allowedRequest(queryParameters) {
     const secret = getSecret();
     if (!secret) {
         return true;
     }
-    if (!req.query || !req.query.secret) {
+    if (!queryParameters || !queryParameters.secret) {
         return false;
     }
-    return req.query.secret === secret;
+    return queryParameters.secret === secret;
 }
 
-function getQueryParameters(req) {
-    const result = getQueryParametersFromUrl(req);
+function getOptions(queryParameters) {
+    const result = parseQueryParameters(queryParameters);
     result.launchOptions = {
         // headless: false,
         args: [
@@ -86,9 +74,9 @@ function getQueryParameters(req) {
     return result;
 }
 
-function getQueryParametersFromUrl(req) {
-    return Object.keys(req.query).reduce((params, key) => {
-        const q = req.query[key];
+function parseQueryParameters(queryParameters) {
+    return Object.keys(queryParameters).reduce((params, key) => {
+        const q = queryParameters[key];
         let value;
         try {
             value = JSON.parse(q);
@@ -99,19 +87,25 @@ function getQueryParametersFromUrl(req) {
             ...params,
             [key]: value
         }
-    }, req.query || {});
+    }, queryParameters || {});
 }
 
-async function tryWithPuppeteer(url, queryParams, res) {
+async function tryWithPuppeteer(url, options) {
     try {
-        const buffer = await takePlainPuppeteerScreenshot(url, queryParams);
+        const buffer = await takePlainPuppeteerScreenshot(url, options);
         console.info(`Successfully captured URL: ${url}`);
         latest.capture = buffer;
-        const responseType = getResponseType(queryParams);
-        res.type(responseType).send(buffer);
+        return {
+            statusCode: 200,
+            responseType: getResponseType(options),
+            buffer: buffer
+        }
     } catch (e) {
         console.log('Capture failed due to: ' + e.message);
-        res.status(500).send(e.message);
+        return {
+            statusCode: 500,
+            message: e.message
+        }
     }
 }
 

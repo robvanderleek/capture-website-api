@@ -3,18 +3,13 @@
 ![Screenshot](static/screenshot.png)
 
 [![Build Status](https://github.com/robvanderleek/capture-website-api/workflows/Prod/badge.svg)](https://github.com/robvanderleek/capture-website-api/actions)
-[![BCH compliance](https://bettercodehub.com/edge/badge/robvanderleek/capture-website-api?branch=main)](https://bettercodehub.com/)
+[![Maintainability](https://api.codeclimate.com/v1/badges/20056816e22527745a74/maintainability)](https://codeclimate.com/github/robvanderleek/capture-website-api/maintainability)
 [![Dependabot](https://badgen.net/badge/Dependabot/enabled/green?icon=dependabot)](https://dependabot.com/)
 [![DockerHub image pulls](https://img.shields.io/docker/pulls/robvanderleek/capture-website-api)](https://hub.docker.com/repository/docker/robvanderleek/capture-website-api)
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/0c2a8937-ed81-4246-ab00-efc0192c59a4/deploy-status)](https://app.netlify.com/sites/capture-website-api/deploys)
 
-Capture screenshots of websites as a (host it yourself) API. This project is a wrapper around this library: https://github.com/sindresorhus/capture-website
-
-Try it yourself (*but beware that your screenshot is visible on a public website and the request may fail due to high traffic. Read further how prevent this*):
-```
-curl 'https://capture-website-api.herokuapp.com/capture?url=https://twitter.com' -o screenshot.png
-```
-
+Capture screenshots of websites as a (host it yourself) API.
+This project is a wrapper around this library: https://github.com/sindresorhus/capture-website
 
 # Installation
 
@@ -41,7 +36,7 @@ curl 'localhost:8080/capture?url=https://news.ycombinator.com/' -o screenshot.pn
 
 1. Clone the repo:
 ```
-git clone git@github.com:robvanderleek/capture-website-api.git && cd capture-website-api
+git clone git@github.com:robvanderleek/capture-website-api.git && cd capture-website-api/standalone
 ```
 
 2. Build the image:
@@ -65,7 +60,7 @@ Run in a terminal:
 
 1. Clone the repo:
 ```
-git clone git@github.com:robvanderleek/capture-website-api.git && cd capture-website-api
+git clone git@github.com:robvanderleek/capture-website-api.git && cd capture-website-api/standalone
 ```
 
 2. Install dependencies:
@@ -83,50 +78,35 @@ yarn start
 curl 'localhost:8080/capture?url=https://www.reddit.com' -o screenshot.png
 ```
 
-## Heroku
+## Netlify
 
-Deploy and run on Heroku:
+Deploy and run on Netlify:
 
 1. Clone the repo:
 ```
-git clone git@github.com:robvanderleek/capture-website-api.git && cd capture-website-api
+git clone git@github.com:robvanderleek/capture-website-api.git && cd capture-website-api/serverless
 ```
 
-2. Login to the Heroku container repository:
+2. Deploy to Netlify:
 ```
-heroku container:login
-```
-
-3. Create repository entry:
-```
-heroku create
+netlify deploy
 ```
 
-4. Push container:
+3. Get site URL:
 ```
-heroku container:push web
-```
-
-5. Release container:
-```
-heroku container:release web
-```
-
-6. Get Heroku endpoint:
-```
-CWA_URL=$(heroku info -s | grep web_url | cut -d= -f2) 
+netlify status 
 ```
 
 7. Make screenshot test request:
 ```
-curl "${CWA_URL}capture?url=https://www.linkedin.com" -o screenshot.png
+curl "${SITE_URL}/.netlify/functions/capture?url=https://www.linkedin.com" -o screenshot.png
 ```
 
 # Usage
 
 Call the `/capture` endpoint and pass the site URL using the query parameters `url`:
 ```
-$ curl 'https://capture-website-api.herokuapp.com/capture?url=http://gmail.com' -o screenshot.png
+$ curl 'https://capture-website-api.netlify.app/capture?url=http://gmail.com' -o screenshot.png
 ```
 Simple as that.
 
@@ -152,7 +132,7 @@ Supported options are:
 Most of the configuration options from the wrapped `capture-website` library are supported using query parameters. 
 For example, to capture a site with a 650x350 viewport, no default background and animations disabled use:
 ```
-curl 'https://capture-website-api.herokuapp.com/capture?url=http://amazon.com&width=650&height=350&scaleFactor=1&defaultBackground=false&disableAnimations=true' -o screenshot.png
+curl 'https://capture-website-api.netlify.app/capture?url=http://amazon.com&width=650&height=350&scaleFactor=1&defaultBackground=false&disableAnimations=true' -o screenshot.png
 ```
 
 See https://github.com/sindresorhus/capture-website for a full list of options.
@@ -166,7 +146,7 @@ capture these sites with plain Puppeteer by supplying the query parameter `plain
 
 This app looks at two environment variables:
 
-* `SHOW_RESULTS`: if `true` the latest capture result can be viewed in the browser by browsing the base url (e.g.: https://capture-website-api.herokuapp.com/)  
+* `SHOW_RESULTS`: if `true` the latest capture result can be viewed in the browser by browsing the base url  
 * `SECRET`: when set all capture requests need to contain a query parameter `secret` whose value matches the value of this environment variable
 
 # Contributing
