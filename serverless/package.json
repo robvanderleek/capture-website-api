@@ -4,7 +4,6 @@
   "description": "",
   "exports": "./src/index.js",
   "scripts": {
-    "dev": "netlify dev",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest"
   },
   "author": "",
