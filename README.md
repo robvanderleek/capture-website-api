@@ -6,7 +6,8 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/20056816e22527745a74/maintainability)](https://codeclimate.com/github/robvanderleek/capture-website-api/maintainability)
 [![Dependabot](https://badgen.net/badge/Dependabot/enabled/green?icon=dependabot)](https://dependabot.com/)
 [![DockerHub image pulls](https://img.shields.io/docker/pulls/robvanderleek/capture-website-api)](https://hub.docker.com/repository/docker/robvanderleek/capture-website-api)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/0c2a8937-ed81-4246-ab00-efc0192c59a4/deploy-status)](https://app.netlify.com/sites/capture-website-api/deploys)
+[![Vercel](https://vercelbadge.vercel.app/api/robvanderleek/capture-website-api)]
+
 
 Capture screenshots of websites as a (host it yourself) API.
 This project is a wrapper around this library: https://github.com/sindresorhus/capture-website
@@ -78,28 +79,28 @@ yarn start
 curl 'localhost:8080/capture?url=https://www.reddit.com' -o screenshot.png
 ```
 
-## Netlify
+## Vercel
 
-Deploy and run on Netlify:
+Deploy and run on Vercel:
 
 1. Clone the repo:
 ```
 git clone git@github.com:robvanderleek/capture-website-api.git && cd capture-website-api/serverless
 ```
 
-2. Deploy to Netlify:
+2. Deploy to Vercel:
 ```
-netlify deploy
+vercel deploy
 ```
 
 3. Get site URL:
 ```
-netlify status 
+netlify ls 
 ```
 
 7. Make screenshot test request:
 ```
-curl "${SITE_URL}/.netlify/functions/capture?url=https://www.linkedin.com" -o screenshot.png
+curl "${SITE_URL}/api/capture?url=https://www.linkedin.com" -o screenshot.png
 ```
 
 # Usage
