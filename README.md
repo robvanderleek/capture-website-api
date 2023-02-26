@@ -2,11 +2,11 @@
 
 ![Screenshot](static/screenshot.png)
 
-[![Build Status](https://github.com/robvanderleek/capture-website-api/workflows/Prod/badge.svg)](https://github.com/robvanderleek/capture-website-api/actions)
+[![Build Status](https://github.com/robvanderleek/capture-website-api/workflows/CICD/badge.svg)](https://github.com/robvanderleek/capture-website-api/actions)
 [![Maintainability](https://api.codeclimate.com/v1/badges/20056816e22527745a74/maintainability)](https://codeclimate.com/github/robvanderleek/capture-website-api/maintainability)
 [![Dependabot](https://badgen.net/badge/Dependabot/enabled/green?icon=dependabot)](https://dependabot.com/)
 [![DockerHub image pulls](https://img.shields.io/docker/pulls/robvanderleek/capture-website-api)](https://hub.docker.com/repository/docker/robvanderleek/capture-website-api)
-[![Vercel](https://vercelbadge.vercel.app/api/robvanderleek/capture-website-api)]
+![Vercel](https://vercelbadge.vercel.app/api/robvanderleek/capture-website-api)
 
 
 Capture screenshots of websites as a (host it yourself) API.
