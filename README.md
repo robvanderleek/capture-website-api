@@ -133,10 +133,17 @@ Supported options are:
 Most of the configuration options from the wrapped `capture-website` library are supported using query parameters. 
 For example, to capture a site with a 650x350 viewport, no default background and animations disabled use:
 ```
-curl 'https://capture-website-api.netlify.app/capture?url=http://amazon.com&width=650&height=350&scaleFactor=1&defaultBackground=false&disableAnimations=true' -o screenshot.png
+curl 'https://capture-website-api.netlify.app/capture?url=http://amazon.com&width=650&height=350&scaleFactor=1&defaultBackground=false&disableAnimations=true&wait_before_screenshot_ms=300' -o screenshot.png
 ```
 
 See https://github.com/sindresorhus/capture-website for a full list of options.
+
+### Capture Delay
+
+You may require to wait for async requests or animations to finish before capturing the screenshot. There are two ways of doing this, both specified in the query parameters:
+
+1. `wait_before_screenshot_ms` (in ms, defaults to `300`) will wait before capturing a screenshot.
+2. For standalone: `capture-website` library's [`delay`](https://github.com/sindresorhus/capture-website#delay) (in seconds)
 
 ## Use plain Puppeteer 
 
