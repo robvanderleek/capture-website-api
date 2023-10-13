@@ -1,10 +1,11 @@
 import {
+    allowedRequest,
     doCaptureWork,
     fieldValuesToNumber,
+    getOptions,
     getResponseType,
     latestCapturePage,
-    showResults,
-    allowedRequest
+    showResults
 } from "./helpers";
 import {expect, jest} from '@jest/globals'
 
@@ -109,3 +110,13 @@ test('do real capture', async () => {
     expect(resultType).toBe('png');
     expect(resultBuffer).toBeDefined();
 });
+
+test('get options', () => {
+    const result = getOptions({
+        'url': 'https://amazon.com',
+        'width': '650',
+        'height': '350',
+    });
+    expect(result.width).toBe(650);
+    expect(result.height).toBe(350);
+})

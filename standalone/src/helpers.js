@@ -55,7 +55,7 @@ export function allowedRequest(queryParameters) {
     return queryParameters.secret === secret;
 }
 
-function getOptions(queryParameters) {
+export function getOptions(queryParameters) {
     const result = parseQueryParameters(queryParameters);
     result.launchOptions = {
         // headless: false,
