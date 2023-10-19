@@ -32,7 +32,7 @@ async function getOptions(queryParameters) {
             '--mute-audio',
             '--use-fake-ui-for-media-stream' // Pages that ask for webcam/microphone access
         ],
-        executablePath: process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath,
+        executablePath: process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath(),
     };
     fieldValuesToNumber(result, 'width', 'height', 'quality', 'scaleFactor', 'timeout', 'delay', 'offset');
     return result;
