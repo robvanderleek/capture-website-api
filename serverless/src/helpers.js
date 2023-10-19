@@ -1,6 +1,6 @@
 const {getSecret} = require('./config.js');
 const puppeteer = require('puppeteer-core');
-const chromium = require('chrome-aws-lambda');
+const chromium = require("@sparticuz/chromium");
 
 async function doCaptureWork(queryParameters) {
     const options = await getOptions(queryParameters);
