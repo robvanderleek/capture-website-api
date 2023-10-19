@@ -89,13 +89,13 @@ git clone git@github.com:robvanderleek/capture-website-api.git && cd capture-web
 ```
 
 2. Deploy to Vercel:
-```
+```shell
 vercel deploy
 ```
 
 3. Get site URL:
-```
-netlify ls 
+```shell
+vercel ls 
 ```
 
 7. Make screenshot test request:
@@ -106,8 +106,8 @@ curl "${SITE_URL}/api/capture?url=https://www.linkedin.com" -o screenshot.png
 # Usage
 
 Call the `/capture` endpoint and pass the site URL using the query parameters `url`:
-```
-$ curl 'https://capture-website-api.netlify.app/capture?url=http://gmail.com' -o screenshot.png
+```shell
+curl 'https://capture-website-api.vercel.app/api/capture?url=http://gmail.com' -o screenshot.png
 ```
 Simple as that.
 
@@ -133,7 +133,7 @@ Supported options are:
 Most of the configuration options from the wrapped `capture-website` library are supported using query parameters. 
 For example, to capture a site with a 650x350 viewport, no default background and animations disabled use:
 ```
-curl 'https://capture-website-api.netlify.app/capture?url=http://amazon.com&width=650&height=350&scaleFactor=1&defaultBackground=false&disableAnimations=true&wait_before_screenshot_ms=300' -o screenshot.png
+curl 'https://capture-website-api.vercel.app/api/capture?url=http://amazon.com&width=650&height=350&scaleFactor=1&defaultBackground=false&disableAnimations=true&wait_before_screenshot_ms=300' -o screenshot.png
 ```
 
 See https://github.com/sindresorhus/capture-website for a full list of options.
