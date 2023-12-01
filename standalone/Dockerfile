@@ -1,7 +1,7 @@
 FROM node:16-slim
 RUN apt-get update && apt-get install --no-install-recommends -yq \
     libgconf-2-4 libxss1 libxtst6 libxshmfence1 ca-certificates wget curl \
-    gnupg2 python
+    gnupg2 python dumb-init
 ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE 1
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub |\
     apt-key add -
@@ -29,4 +29,5 @@ RUN chown -R pptruser:pptruser /app
 COPY src src
 RUN chown -R pptruser:pptruser /app/src
 USER pptruser
-CMD yarn start
+ENTRYPOINT ["/usr/bin/dumb-init", "--"]
+CMD ["yarn", "start"]
