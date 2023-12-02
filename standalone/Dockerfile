@@ -1,4 +1,4 @@
-FROM node:16-slim
+FROM --platform=linux/amd64 node:16-slim
 RUN apt-get update && apt-get install --no-install-recommends -yq \
     libgconf-2-4 libxss1 libxtst6 libxshmfence1 ca-certificates wget curl \
     gnupg2 python dumb-init
