@@ -3,8 +3,29 @@ on:
   push:
     branches-ignore:
       - main
+  pull_request:
+    banches:
+      - main
 jobs:
-  cicd:
+  serverless:
+    runs-on: ubuntu-latest
+    env:
+      CI: true
+    defaults:
+      run:
+        working-directory: serverless
+    steps:
+    - name: 'Checkout sources'
+      uses: actions/checkout@v3
+    - name: 'Setup NodeJS'
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18.x'
+    - name: 'Install depenencies'
+      run: yarn install
+    - name: 'Run tests'
+      run: yarn test
+  standalone:
     runs-on: ubuntu-latest
     env:
       CI: true
@@ -12,26 +33,20 @@ jobs:
       run:
         working-directory: standalone
     steps:
-    - name: 'Checkout repository'
-      uses: actions/checkout@v2
-
+    - name: 'Checkout sources'
+      uses: actions/checkout@v3
     - name: 'Setup NodeJS'
       uses: actions/setup-node@v3
       with:
-        node-version: 14.x
-
+        node-version: '18.x'
     - name: 'Install depenencies'
       run: yarn install
-
     - name: 'Run tests'
       run: yarn test
-
     - name: 'Set up QEMU'
       uses: docker/setup-qemu-action@v1
-
     - name: 'Set up Docker Buildx'
       uses: docker/setup-buildx-action@v1
-
     - name: 'Build Docker image'
       uses: docker/build-push-action@v2
       with:
