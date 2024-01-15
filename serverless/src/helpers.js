@@ -77,11 +77,14 @@ async function takePlainPuppeteerScreenshot(url, options) {
     options.wait_before_screenshot_ms = options.wait_before_screenshot_ms || 300;
     const browser = await puppeteer.launch(options.launchOptions);
     const page = await browser.newPage();
-    await page.goto(url);
-    await setViewport(page, options);
-    await new Promise(r => setTimeout(r, options.wait_before_screenshot_ms));
-    const buffer = await page.screenshot();
-    await browser.close();
+    try {
+        await page.goto(url);
+        await setViewport(page, options);
+        await new Promise(r => setTimeout(r, options.wait_before_screenshot_ms));
+        const buffer = await page.screenshot();
+    } finally {
+        await browser.close();
+    }
     return buffer;
 }
 
