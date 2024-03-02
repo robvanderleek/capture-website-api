@@ -2,14 +2,14 @@
 
 <div align="center">
 
-    ![Logo](static/logo_512x512.png)
-    <a href="https://www.freepik.com/icon/capture_6276243">Icon by rizky adhitya pradana</a>
+![Logo](static/logo_512x512.png)
+<a href="https://www.freepik.com/icon/capture_6276243">Icon by rizky adhitya pradana</a>
 
 </div>
 
 <div align="center">
 
-    ![Screenshot](static/screenshot.png)
+![Screenshot](static/screenshot.png)
 
 </div>
 
