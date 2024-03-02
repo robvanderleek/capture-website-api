@@ -1,6 +1,13 @@
 # Capture website API
 
+<div align="center">
+    ![Logo](static/logo_512x512.png)
+    <a href="https://www.freepik.com/icon/capture_6276243">Icon by rizky adhitya pradana</a>
+</div>
+
+<div align="center">
 ![Screenshot](static/screenshot.png)
+</div>
 
 [![Build Status](https://github.com/robvanderleek/capture-website-api/workflows/CICD/badge.svg)](https://github.com/robvanderleek/capture-website-api/actions)
 [![Maintainability](https://api.codeclimate.com/v1/badges/20056816e22527745a74/maintainability)](https://codeclimate.com/github/robvanderleek/capture-website-api/maintainability)
