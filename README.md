@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[![Logo](static/logo_512x512.png)](https://www.freepik.com/icon/capture_6276243)
+[![Logo](static/logo_256x256.png)](https://www.freepik.com/icon/capture_6276243)
 
 </div>
 
