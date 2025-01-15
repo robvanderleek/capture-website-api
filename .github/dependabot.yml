@@ -1,7 +1,13 @@
 version: 2
 updates:
 - package-ecosystem: npm
-  directory: "/"
+  directory: "/serverless"
+  schedule:
+    interval: weekly
+    time: "04:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: npm
+  directory: "/standalone"
   schedule:
     interval: weekly
     time: "04:00"
