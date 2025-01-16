@@ -58,17 +58,17 @@ git clone git@github.com:robvanderleek/capture-website-api.git
 cd capture-website-api/standalone
 ```
 
-2. Build the image:
+3. Build the image:
 ```shell
 docker build -t cwa .
 ```
 
-3. Start the container: 
+4. Start the container: 
 ```shell
 docker run -it -p 8080:8080 cwa
 ```
 
-4. Do screenshot test request:
+5. Do screenshot test request:
 ```shell
 curl 'localhost:8080/capture?url=https://www.youtube.com' -o screenshot.png
 ```
@@ -78,22 +78,27 @@ curl 'localhost:8080/capture?url=https://www.youtube.com' -o screenshot.png
 Run in a terminal:
 
 1. Clone the repo:
-```
-git clone git@github.com:robvanderleek/capture-website-api.git && cd capture-website-api/standalone
+```shell
+git clone git@github.com:robvanderleek/capture-website-api.git
 ```
 
-2. Install dependencies:
+2. Go to the `standalone` directory:
+```shell
+cd capture-website-api/standalone
 ```
+
+3. Install dependencies:
+```shell
 yarn
 ```
 
-3. Start the server:
-```
+4. Start the server:
+```shell
 yarn start
 ```
 
-4. Make screenshot test request:
-```
+5. Do screenshot test request:
+```shell
 curl 'localhost:8080/capture?url=https://www.reddit.com' -o screenshot.png
 ```
 
