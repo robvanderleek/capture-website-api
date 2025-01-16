@@ -22,8 +22,8 @@
 
 </div>
 
-Capture screenshots of websites as a (host it yourself) API.
-This project is a wrapper around this library: https://github.com/sindresorhus/capture-website
+Capture screenshots of websites as a (host it yourself) API. This project is a
+wrapper around this library: https://github.com/sindresorhus/capture-website
 
 # Installation
 
@@ -49,22 +49,27 @@ curl 'localhost:8080/capture?url=https://news.ycombinator.com/' -o screenshot.pn
 ### Build the docker image and run it
 
 1. Clone the repo:
+```shell
+git clone git@github.com:robvanderleek/capture-website-api.git
 ```
-git clone git@github.com:robvanderleek/capture-website-api.git && cd capture-website-api/standalone
+
+2. Go to the `standalone` directory:
+```shell
+cd capture-website-api/standalone
 ```
 
 2. Build the image:
-```
+```shell
 docker build -t cwa .
 ```
 
 3. Start the container: 
-```
+```shell
 docker run -it -p 8080:8080 cwa
 ```
 
-4. Make screenshot test request:
-```
+4. Do screenshot test request:
+```shell
 curl 'localhost:8080/capture?url=https://www.youtube.com' -o screenshot.png
 ```
 
