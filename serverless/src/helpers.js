@@ -73,7 +73,6 @@ async function tryWithPuppeteer(url, options) {
 }
 
 async function takePlainPuppeteerScreenshot(url, options) {
-    console.log('Launching puppeteer with options: ' + JSON.stringify(options));
     options.encoding = 'binary';
     options.wait_before_screenshot_ms = options.wait_before_screenshot_ms || 300;
     let browser;
