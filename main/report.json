@@ -1,7 +1,7 @@
 {
   "version": "0.18.1",
-  "uuid": "53d325f3-53c4-4033-a044-98d704b8deeb",
-  "timestamp": "2025-01-16T12:55:16+00:00",
+  "uuid": "3ee35df2-3be3-4f39-8a1d-70609c1fd8fb",
+  "timestamp": "2025-01-16T13:27:55+00:00",
   "root": "/github/workspace",
   "repository": {
     "owner": "robvanderleek",
@@ -12,7 +12,7 @@
     "totals": {
       "JavaScript": {
         "files": 8,
-        "lines_of_code": 287,
+        "lines_of_code": 288,
         "functions": 24,
         "hard_to_maintain": 0,
         "unmaintainable": 0
@@ -24,7 +24,7 @@
           "serverless/",
           "standalone/"
         ],
-        "profile": [119, 168, 0, 0]
+        "profile": [119, 169, 0, 0]
       },
       "serverless/src/": {
         "entries": [
@@ -32,14 +32,14 @@
           "helpers.js",
           "helpers.test.js"
         ],
-        "profile": [55, 52, 0, 0]
+        "profile": [55, 53, 0, 0]
       },
       "serverless/": {
         "entries": [
           "src/",
           "api/"
         ],
-        "profile": [55, 52, 0, 0]
+        "profile": [55, 53, 0, 0]
       },
       "serverless/api/": {
         "entries": [
@@ -73,20 +73,20 @@
         ]
       },
       "serverless/src/helpers.js": {
-        "checksum": "5f95d5cc8d3525e80bf5ff92c430623c",
+        "checksum": "22c59802ef6e81b0a185c0033cdbc6d8",
         "language": "JavaScript",
-        "loc": 107,
-        "profile": [55, 52, 0, 0],
+        "loc": 108,
+        "profile": [55, 53, 0, 0],
         "measurements": [
           {"unit_name": "doCaptureWork", "start": {"line": 5, "column": 7}, "end": {"line": 10, "column": 2}, "value": 6},
           {"unit_name": "allowedRequest", "start": {"line": 12, "column": 1}, "end": {"line": 21, "column": 2}, "value": 10},
           {"unit_name": "getOptions", "start": {"line": 23, "column": 7}, "end": {"line": 39, "column": 2}, "value": 17},
           {"unit_name": "parseQueryParameters", "start": {"line": 41, "column": 1}, "end": {"line": 55, "column": 2}, "value": 15},
           {"unit_name": "tryWithPuppeteer", "start": {"line": 57, "column": 7}, "end": {"line": 73, "column": 2}, "value": 17},
-          {"unit_name": "takePlainPuppeteerScreenshot", "start": {"line": 75, "column": 7}, "end": {"line": 92, "column": 2}, "value": 18},
-          {"unit_name": "setViewport", "start": {"line": 94, "column": 7}, "end": {"line": 103, "column": 2}, "value": 10},
-          {"unit_name": "getResponseType", "start": {"line": 105, "column": 1}, "end": {"line": 110, "column": 2}, "value": 6},
-          {"unit_name": "fieldValuesToNumber", "start": {"line": 112, "column": 1}, "end": {"line": 119, "column": 2}, "value": 8}
+          {"unit_name": "takePlainPuppeteerScreenshot", "start": {"line": 75, "column": 7}, "end": {"line": 93, "column": 2}, "value": 19},
+          {"unit_name": "setViewport", "start": {"line": 95, "column": 7}, "end": {"line": 104, "column": 2}, "value": 10},
+          {"unit_name": "getResponseType", "start": {"line": 106, "column": 1}, "end": {"line": 111, "column": 2}, "value": 6},
+          {"unit_name": "fieldValuesToNumber", "start": {"line": 113, "column": 1}, "end": {"line": 120, "column": 2}, "value": 8}
         ]
       },
       "serverless/src/helpers.test.js": {
