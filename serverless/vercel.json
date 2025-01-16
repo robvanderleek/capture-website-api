@@ -1,7 +1,7 @@
 {
-  "git": {
-    "deploymentEnabled": {
-      "_codelimit_reports": false
+  "functions": {
+    "api/capture.js": {
+      "maxDuration": 60
     }
   }
 }
