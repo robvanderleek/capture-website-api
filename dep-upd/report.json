@@ -1,0 +1,157 @@
+{
+  "version": "0.18.1",
+  "uuid": "37a5bbae-04ce-447f-b280-a551e561fe6b",
+  "timestamp": "2025-01-20T11:19:10+00:00",
+  "root": "/github/workspace",
+  "repository": {
+    "owner": "robvanderleek",
+    "name": "capture-website-api",
+    "branch": "dep-upd"
+  },
+  "codebase": {
+    "totals": {
+      "JavaScript": {
+        "files": 8,
+        "lines_of_code": 287,
+        "functions": 24,
+        "hard_to_maintain": 0,
+        "unmaintainable": 0
+      }
+    },
+    "tree": {
+      "./": {
+        "entries": [
+          "serverless/",
+          "standalone/"
+        ],
+        "profile": [119, 168, 0, 0]
+      },
+      "serverless/src/": {
+        "entries": [
+          "config.js",
+          "helpers.js",
+          "helpers.test.js"
+        ],
+        "profile": [55, 52, 0, 0]
+      },
+      "serverless/": {
+        "entries": [
+          "src/",
+          "api/"
+        ],
+        "profile": [55, 52, 0, 0]
+      },
+      "serverless/api/": {
+        "entries": [
+          "capture.js"
+        ],
+        "profile": [0, 0, 0, 0]
+      },
+      "standalone/src/": {
+        "entries": [
+          "index.js",
+          "config.js",
+          "helpers.js",
+          "helpers.test.js"
+        ],
+        "profile": [64, 116, 0, 0]
+      },
+      "standalone/": {
+        "entries": [
+          "src/"
+        ],
+        "profile": [64, 116, 0, 0]
+      }
+    },
+    "files": {
+      "serverless/src/config.js": {
+        "checksum": "cea0b99164c180ae66252958f40e754a",
+        "language": "JavaScript",
+        "loc": 0,
+        "profile": [0, 0, 0, 0],
+        "measurements": [
+        ]
+      },
+      "serverless/src/helpers.js": {
+        "checksum": "5f95d5cc8d3525e80bf5ff92c430623c",
+        "language": "JavaScript",
+        "loc": 107,
+        "profile": [55, 52, 0, 0],
+        "measurements": [
+          {"unit_name": "doCaptureWork", "start": {"line": 5, "column": 7}, "end": {"line": 10, "column": 2}, "value": 6},
+          {"unit_name": "allowedRequest", "start": {"line": 12, "column": 1}, "end": {"line": 21, "column": 2}, "value": 10},
+          {"unit_name": "getOptions", "start": {"line": 23, "column": 7}, "end": {"line": 39, "column": 2}, "value": 17},
+          {"unit_name": "parseQueryParameters", "start": {"line": 41, "column": 1}, "end": {"line": 55, "column": 2}, "value": 15},
+          {"unit_name": "tryWithPuppeteer", "start": {"line": 57, "column": 7}, "end": {"line": 73, "column": 2}, "value": 17},
+          {"unit_name": "takePlainPuppeteerScreenshot", "start": {"line": 75, "column": 7}, "end": {"line": 92, "column": 2}, "value": 18},
+          {"unit_name": "setViewport", "start": {"line": 94, "column": 7}, "end": {"line": 103, "column": 2}, "value": 10},
+          {"unit_name": "getResponseType", "start": {"line": 105, "column": 1}, "end": {"line": 110, "column": 2}, "value": 6},
+          {"unit_name": "fieldValuesToNumber", "start": {"line": 112, "column": 1}, "end": {"line": 119, "column": 2}, "value": 8}
+        ]
+      },
+      "serverless/src/helpers.test.js": {
+        "checksum": "968b2cd578280ae6eff96c865c5ef380",
+        "language": "JavaScript",
+        "loc": 0,
+        "profile": [0, 0, 0, 0],
+        "measurements": [
+        ]
+      },
+      "serverless/api/capture.js": {
+        "checksum": "9d00a765c8e0bdddd30d4819c4570d48",
+        "language": "JavaScript",
+        "loc": 0,
+        "profile": [0, 0, 0, 0],
+        "measurements": [
+        ]
+      },
+      "standalone/src/index.js": {
+        "checksum": "ffc586de499cbd39772fc8f6787944a4",
+        "language": "JavaScript",
+        "loc": 21,
+        "profile": [0, 21, 0, 0],
+        "measurements": [
+          {"unit_name": "capture", "start": {"line": 8, "column": 7}, "end": {"line": 28, "column": 2}, "value": 21}
+        ]
+      },
+      "standalone/src/config.js": {
+        "checksum": "f0482f179c316519884dc5f44d7926e5",
+        "language": "JavaScript",
+        "loc": 0,
+        "profile": [0, 0, 0, 0],
+        "measurements": [
+        ]
+      },
+      "standalone/src/helpers.js": {
+        "checksum": "419ea14710132fdf4e2fcbe02dfdb45c",
+        "language": "JavaScript",
+        "loc": 152,
+        "profile": [57, 95, 0, 0],
+        "measurements": [
+          {"unit_name": "showResults", "start": {"line": 15, "column": 8}, "end": {"line": 18, "column": 2}, "value": 4},
+          {"unit_name": "doCaptureWork", "start": {"line": 20, "column": 14}, "end": {"line": 45, "column": 2}, "value": 26},
+          {"unit_name": "allowedRequest", "start": {"line": 47, "column": 8}, "end": {"line": 56, "column": 2}, "value": 10},
+          {"unit_name": "getOptions", "start": {"line": 58, "column": 8}, "end": {"line": 75, "column": 2}, "value": 17},
+          {"unit_name": "parseQueryParameters", "start": {"line": 77, "column": 1}, "end": {"line": 91, "column": 2}, "value": 15},
+          {"unit_name": "tryWithPuppeteer", "start": {"line": 93, "column": 7}, "end": {"line": 110, "column": 2}, "value": 18},
+          {"unit_name": "takePlainPuppeteerScreenshot", "start": {"line": 112, "column": 7}, "end": {"line": 129, "column": 2}, "value": 18},
+          {"unit_name": "setViewport", "start": {"line": 131, "column": 7}, "end": {"line": 140, "column": 2}, "value": 10},
+          {"unit_name": "getResponseType", "start": {"line": 142, "column": 8}, "end": {"line": 147, "column": 2}, "value": 6},
+          {"unit_name": "fieldValuesToNumber", "start": {"line": 149, "column": 8}, "end": {"line": 156, "column": 2}, "value": 8},
+          {"unit_name": "latestCapturePage", "start": {"line": 158, "column": 8}, "end": {"line": 173, "column": 2}, "value": 16},
+          {"unit_name": "latestCapture", "start": {"line": 175, "column": 8}, "end": {"line": 178, "column": 2}, "value": 4}
+        ]
+      },
+      "standalone/src/helpers.test.js": {
+        "checksum": "ab3f5d5a17ce3d629f1f36739947c7eb",
+        "language": "JavaScript",
+        "loc": 7,
+        "profile": [7, 0, 0, 0],
+        "measurements": [
+          {"unit_name": "type", "start": {"line": 95, "column": 5}, "end": {"line": 103, "column": 6}, "value": 4},
+          {"unit_name": "send", "start": {"line": 98, "column": 9}, "end": {"line": 100, "column": 10}, "value": 3}
+        ]
+      }
+    }
+  }
+}
