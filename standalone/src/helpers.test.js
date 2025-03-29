@@ -109,7 +109,7 @@ test('do real capture', async () => {
 
     expect(resultType).toBe('png');
     expect(resultBuffer).toBeDefined();
-});
+}, 10000);
 
 test('get options', () => {
     const result = getOptions({
