@@ -27,7 +27,8 @@ export async function doCaptureWork(queryParameters) {
         return await tryWithPuppeteer(url, options);
     } else {
         try {
-            const buffer = await captureWebsite.buffer(url, options);
+            const array = await captureWebsite.buffer(url, options);
+            const buffer = Buffer.from(array);
             console.info(`Successfully captured URL: ${url}`);
             latest.capture = buffer;
             return {
