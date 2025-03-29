@@ -1,7 +1,7 @@
 {
   "version": "0.18.1",
-  "uuid": "9b959269-152d-45bc-9fbe-04213bf9585f",
-  "timestamp": "2025-03-27T12:53:42+00:00",
+  "uuid": "34f71c35-7125-4018-abd8-a6d8238daf3a",
+  "timestamp": "2025-03-29T17:38:56+00:00",
   "root": "/github/workspace",
   "repository": {
     "owner": "robvanderleek",
@@ -12,7 +12,7 @@
     "totals": {
       "JavaScript": {
         "files": 8,
-        "lines_of_code": 287,
+        "lines_of_code": 288,
         "functions": 24,
         "hard_to_maintain": 0,
         "unmaintainable": 0
@@ -24,7 +24,7 @@
           "serverless/",
           "standalone/"
         ],
-        "profile": [119, 168, 0, 0]
+        "profile": [119, 169, 0, 0]
       },
       "serverless/src/": {
         "entries": [
@@ -54,13 +54,13 @@
           "helpers.js",
           "config.js"
         ],
-        "profile": [64, 116, 0, 0]
+        "profile": [64, 117, 0, 0]
       },
       "standalone/": {
         "entries": [
           "src/"
         ],
-        "profile": [64, 116, 0, 0]
+        "profile": [64, 117, 0, 0]
       }
     },
     "files": {
@@ -125,23 +125,23 @@
         ]
       },
       "standalone/src/helpers.js": {
-        "checksum": "419ea14710132fdf4e2fcbe02dfdb45c",
+        "checksum": "e5a2fb11b2299421252bd5f02cd3aa59",
         "language": "JavaScript",
-        "loc": 152,
-        "profile": [57, 95, 0, 0],
+        "loc": 153,
+        "profile": [57, 96, 0, 0],
         "measurements": [
           {"unit_name": "showResults", "start": {"line": 15, "column": 8}, "end": {"line": 18, "column": 2}, "value": 4},
-          {"unit_name": "doCaptureWork", "start": {"line": 20, "column": 14}, "end": {"line": 45, "column": 2}, "value": 26},
-          {"unit_name": "allowedRequest", "start": {"line": 47, "column": 8}, "end": {"line": 56, "column": 2}, "value": 10},
-          {"unit_name": "getOptions", "start": {"line": 58, "column": 8}, "end": {"line": 75, "column": 2}, "value": 17},
-          {"unit_name": "parseQueryParameters", "start": {"line": 77, "column": 1}, "end": {"line": 91, "column": 2}, "value": 15},
-          {"unit_name": "tryWithPuppeteer", "start": {"line": 93, "column": 7}, "end": {"line": 110, "column": 2}, "value": 18},
-          {"unit_name": "takePlainPuppeteerScreenshot", "start": {"line": 112, "column": 7}, "end": {"line": 129, "column": 2}, "value": 18},
-          {"unit_name": "setViewport", "start": {"line": 131, "column": 7}, "end": {"line": 140, "column": 2}, "value": 10},
-          {"unit_name": "getResponseType", "start": {"line": 142, "column": 8}, "end": {"line": 147, "column": 2}, "value": 6},
-          {"unit_name": "fieldValuesToNumber", "start": {"line": 149, "column": 8}, "end": {"line": 156, "column": 2}, "value": 8},
-          {"unit_name": "latestCapturePage", "start": {"line": 158, "column": 8}, "end": {"line": 173, "column": 2}, "value": 16},
-          {"unit_name": "latestCapture", "start": {"line": 175, "column": 8}, "end": {"line": 178, "column": 2}, "value": 4}
+          {"unit_name": "doCaptureWork", "start": {"line": 20, "column": 14}, "end": {"line": 46, "column": 2}, "value": 27},
+          {"unit_name": "allowedRequest", "start": {"line": 48, "column": 8}, "end": {"line": 57, "column": 2}, "value": 10},
+          {"unit_name": "getOptions", "start": {"line": 59, "column": 8}, "end": {"line": 76, "column": 2}, "value": 17},
+          {"unit_name": "parseQueryParameters", "start": {"line": 78, "column": 1}, "end": {"line": 92, "column": 2}, "value": 15},
+          {"unit_name": "tryWithPuppeteer", "start": {"line": 94, "column": 7}, "end": {"line": 111, "column": 2}, "value": 18},
+          {"unit_name": "takePlainPuppeteerScreenshot", "start": {"line": 113, "column": 7}, "end": {"line": 130, "column": 2}, "value": 18},
+          {"unit_name": "setViewport", "start": {"line": 132, "column": 7}, "end": {"line": 141, "column": 2}, "value": 10},
+          {"unit_name": "getResponseType", "start": {"line": 143, "column": 8}, "end": {"line": 148, "column": 2}, "value": 6},
+          {"unit_name": "fieldValuesToNumber", "start": {"line": 150, "column": 8}, "end": {"line": 157, "column": 2}, "value": 8},
+          {"unit_name": "latestCapturePage", "start": {"line": 159, "column": 8}, "end": {"line": 174, "column": 2}, "value": 16},
+          {"unit_name": "latestCapture", "start": {"line": 176, "column": 8}, "end": {"line": 179, "column": 2}, "value": 4}
         ]
       },
       "standalone/src/config.js": {
