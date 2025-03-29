@@ -30,6 +30,11 @@ async function getOptions(queryParameters) {
             '--disable-setuid-sandbox',
             '--hide-scrollbars',
             '--mute-audio',
+            "--disable-gpu",
+            "--disable-dev-shm-usage",
+            "--disable-setuid-sandbox",
+            "--no-first-run",
+            "--no-zygote",
             '--use-fake-ui-for-media-stream' // Pages that ask for webcam/microphone access
         ],
         executablePath: process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath(),
@@ -84,7 +89,8 @@ async function takePlainPuppeteerScreenshot(url, options) {
         await page.goto(url);
         await setViewport(page, options);
         await new Promise(r => setTimeout(r, options.wait_before_screenshot_ms));
-        buffer = await page.screenshot();
+        const array = await page.screenshot();
+        buffer = Buffer.from(array);
     } finally {
         await browser.close();
     }

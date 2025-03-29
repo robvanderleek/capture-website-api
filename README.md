@@ -17,7 +17,7 @@
 [![Build Status](https://github.com/robvanderleek/capture-website-api/workflows/main/badge.svg)](https://github.com/robvanderleek/capture-website-api/actions)
 [![CodeLimit](https://github.com/robvanderleek/capture-website-api/blob/_codelimit_reports/add-codelimit/badge.svg)](https://github.com/robvanderleek/capture-website-api/blob/_codelimit_reports/add-codelimit/codelimit.md)
 [![Dependabot](https://badgen.net/badge/Dependabot/enabled/green?icon=dependabot)](https://dependabot.com/)
-[![DockerHub image pulls](https://img.shields.io/docker/pulls/robvanderleek/capture-website-api)](https://hub.docker.com/repository/docker/robvanderleek/capture-website-api)
+[![DockerHub image pulls](https://img.shields.io/docker/pulls/robvanderleek/capture-website-api)](https://hub.docker.com/r/robvanderleek/capture-website-api/)
 ![Vercel](https://vercelbadge.vercel.app/api/robvanderleek/capture-website-api)
 
 </div>
