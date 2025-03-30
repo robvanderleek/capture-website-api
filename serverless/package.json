@@ -9,9 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@sparticuz/chromium": "^133.0.0",
+    "@sparticuz/chromium": "^122.0.0",
     "dotenv": "^16.0.3",
-    "puppeteer-core": "^24.4.0"
+    "puppeteer-core": "^22.5.0"
   },
   "devDependencies": {
     "@jest/globals": "^28.1.3",
