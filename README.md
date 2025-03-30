@@ -170,20 +170,30 @@ You may require to wait for async requests or animations to finish before captur
 
 ## Use plain Puppeteer 
 
-Sometimes the `capture-website` library has problems capturing sites. You can try to
-capture these sites with plain Puppeteer by supplying the query parameter `plainPuppeteer=true`
+Sometimes the `capture-website` library has problems capturing sites. You can
+try to capture these sites with plain Puppeteer by supplying the query
+parameter `plainPuppeteer=true`
 
 ## Environment variables
 
 This app looks at two environment variables:
 
-* `SHOW_RESULTS`: if `true` the latest capture result can be viewed in the browser by browsing the base url  
-* `SECRET`: when set all capture requests need to contain a query parameter `secret` whose value matches the value of this environment variable
+* `SHOW_RESULTS`: if `true` the latest capture result can be viewed in the
+  browser by browsing the base url  
+* `SECRET`: when set all capture requests need to contain a query parameter
+  `secret` whose value matches the value of this environment variable
+
+# Development
+
+To run the serverless version locally, execute `vercel dev` in the root folder
+of the repository.
 
 # Contributing
 
-If you have suggestions for improvements, or want to report a bug, [open an issue](https://github.com/robvanderleek/capture-website-api/issues)!
+If you have suggestions for improvements, or want to report a bug, [open an
+issue](https://github.com/robvanderleek/capture-website-api/issues)!
 
 # License
 
-[ISC](LICENSE) © 2019 Rob van der Leek <robvanderleek@gmail.com> (https://twitter.com/robvanderleek)
+[ISC](LICENSE) © 2019 Rob van der Leek <robvanderleek@gmail.com>
+(https://twitter.com/robvanderleek)
