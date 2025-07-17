@@ -27,7 +27,7 @@ test('generate homepage', () => {
 
     latestCapturePage({}, res);
 
-    expect(res.send).toBeCalledTimes(1);
+    expect(res.send).toHaveBeenCalledTimes(1);
 });
 
 test('all requests are allowed by default', () => {
