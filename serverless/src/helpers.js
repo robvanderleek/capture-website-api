@@ -25,7 +25,7 @@ async function getOptions(queryParameters) {
     result.launchOptions = {
         headless: true,
         args: [
-            ...chromium.args,
+            ...chromium.default.args,
             '--no-sandbox',
             '--disable-setuid-sandbox',
             '--hide-scrollbars',
@@ -37,7 +37,7 @@ async function getOptions(queryParameters) {
             "--no-zygote",
             '--use-fake-ui-for-media-stream' // Pages that ask for webcam/microphone access
         ],
-        executablePath: process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath(),
+        executablePath: process.env.CHROME_EXECUTABLE_PATH || await chromium.default.executablePath(),
     };
     fieldValuesToNumber(result, 'width', 'height', 'quality', 'scaleFactor', 'timeout', 'delay', 'offset');
     return result;
@@ -91,8 +91,12 @@ async function takePlainPuppeteerScreenshot(url, options) {
         await new Promise(r => setTimeout(r, options.wait_before_screenshot_ms));
         const array = await page.screenshot();
         buffer = Buffer.from(array);
+    } catch (e) {
+        console.error('Error during Puppeteer screenshot capture: ', e);
     } finally {
-        await browser.close();
+        if (browser) {
+            await browser.close();
+        }
     }
     return buffer;
 }
