@@ -625,10 +625,10 @@
   dependencies:
     "@sinonjs/commons" "^3.0.1"
 
-"@sparticuz/chromium@^138.0.1":
-  version "138.0.1"
-  resolved "https://registry.yarnpkg.com/@sparticuz/chromium/-/chromium-138.0.1.tgz#5052e070509f54ca93ffe738a514e6c0883e8dff"
-  integrity sha512-Ub58jeYFc/ePyWvVLqKzGE4/F/nL8KcsUHFNHNxDcqFogGTol4UHiwjZ8gLS4oGfbbT1ZPQHQ9hM3aBrqncBpQ==
+"@sparticuz/chromium@^138.0.2":
+  version "138.0.2"
+  resolved "https://registry.yarnpkg.com/@sparticuz/chromium/-/chromium-138.0.2.tgz#8bb5abb7a26a2157d03bad9eae60c0a8b5b97a51"
+  integrity sha512-vs5qUiK6kFCzLCxZ2buWONcB6jdF3VWdYp6kH1tt56tZ78p51dMAxfWsfk9P62z/jAeqbVg4V6Rb3Ic4aAeOKQ==
   dependencies:
     follow-redirects "^1.15.9"
     tar-fs "^3.1.0"
