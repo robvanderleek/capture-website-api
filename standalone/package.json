@@ -12,7 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "capture-website": "^4.2.0",
+    "capture-website": "^5.0.0",
     "dotenv": "^17.2.0",
     "express": "^4.21.2",
     "p-queue": "^7.3.0"
