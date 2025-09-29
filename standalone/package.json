@@ -22,7 +22,7 @@
     "@types/jest": "^30.0.0",
     "@types/node": "^24.0.13",
     "@types/express": "^5.0.1",
-    "jest": "^30.0.4",
+    "jest": "^30.2.0",
     "nodemon": "^3.1.9"
   },
   "engines": {
