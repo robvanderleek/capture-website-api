@@ -15,7 +15,7 @@
     "capture-website": "^4.2.0",
     "dotenv": "^17.2.0",
     "express": "^4.21.2",
-    "p-queue": "^7.3.0"
+    "p-queue": "^9.0.1"
   },
   "devDependencies": {
     "@jest/globals": "^30.0.4",
