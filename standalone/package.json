@@ -14,14 +14,14 @@
   "dependencies": {
     "capture-website": "^4.2.0",
     "dotenv": "^17.2.0",
-    "express": "^4.21.2",
+    "express": "^5.2.1",
     "p-queue": "^7.3.0"
   },
   "devDependencies": {
     "@jest/globals": "^30.0.4",
     "@types/jest": "^30.0.0",
     "@types/node": "^24.0.13",
-    "@types/express": "^5.0.1",
+    "@types/express": "^5.0.6",
     "jest": "^30.0.4",
     "nodemon": "^3.1.9"
   },
