@@ -625,13 +625,13 @@
   dependencies:
     "@sinonjs/commons" "^3.0.1"
 
-"@sparticuz/chromium@^138.0.1":
-  version "138.0.1"
-  resolved "https://registry.yarnpkg.com/@sparticuz/chromium/-/chromium-138.0.1.tgz#5052e070509f54ca93ffe738a514e6c0883e8dff"
-  integrity sha512-Ub58jeYFc/ePyWvVLqKzGE4/F/nL8KcsUHFNHNxDcqFogGTol4UHiwjZ8gLS4oGfbbT1ZPQHQ9hM3aBrqncBpQ==
+"@sparticuz/chromium@^143.0.0":
+  version "143.0.0"
+  resolved "https://registry.yarnpkg.com/@sparticuz/chromium/-/chromium-143.0.0.tgz#f98844e621baf17b347b7f2ffc948e3168cb919f"
+  integrity sha512-/vvplFwu1yDNt/Q1uwXQUwxmfZutU9K+WtzSYwptLWV8IeSdSF6vwW9hW11fZA8Gl9+2mytAGUe6/otgd2VeXA==
   dependencies:
-    follow-redirects "^1.15.9"
-    tar-fs "^3.1.0"
+    follow-redirects "^1.15.11"
+    tar-fs "^3.1.1"
 
 "@tootallnate/quickjs-emscripten@^0.23.0":
   version "0.23.0"
@@ -1362,10 +1362,10 @@ find-up@^4.0.0, find-up@^4.1.0:
     locate-path "^5.0.0"
     path-exists "^4.0.0"
 
-follow-redirects@^1.15.9:
-  version "1.15.9"
-  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.9.tgz#a604fa10e443bf98ca94228d9eebcc2e8a2c8ee1"
-  integrity sha512-gew4GsXizNgdoRyqmyfMHyAmXsZDk6mHkSxZFCzW9gwlbtOW44CDtYavM+y+72qD/Vq2l550kMF52DT8fOLJqQ==
+follow-redirects@^1.15.11:
+  version "1.15.11"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.11.tgz#777d73d72a92f8ec4d2e410eb47352a56b8e8340"
+  integrity sha512-deG2P0JfjrTxl50XGCDyfI97ZGVCxIpfKYmfyrQ54n5FO/0gfIES8C/Psl6kWVDolizcaaxZJnTS0QSMxvnsBQ==
 
 foreground-child@^3.1.0:
   version "3.3.1"
@@ -2520,10 +2520,10 @@ synckit@^0.11.8:
   dependencies:
     "@pkgr/core" "^0.2.4"
 
-tar-fs@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/tar-fs/-/tar-fs-3.1.0.tgz#4675e2254d81410e609d91581a762608de999d25"
-  integrity sha512-5Mty5y/sOF1YWj1J6GiBodjlDc05CUR8PKXrsnFAiSG0xA+GHeWLovaZPYUDXkH/1iKRf2+M5+OrRgzC7O9b7w==
+tar-fs@^3.1.0, tar-fs@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/tar-fs/-/tar-fs-3.1.1.tgz#4f164e59fb60f103d472360731e8c6bb4a7fe9ef"
+  integrity sha512-LZA0oaPOc2fVo82Txf3gw+AkEd38szODlptMYejQUhndHMLQ9M059uXR+AfS7DNo0NpINvSqDsvyaCrBVkptWg==
   dependencies:
     pump "^3.0.0"
     tar-stream "^3.1.5"
