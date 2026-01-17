@@ -1,7 +1,7 @@
 {
-  "version": "0.19.9",
-  "uuid": "4a4e9be8-3ff8-4655-9171-fb4cfb964926",
-  "timestamp": "2025-07-17T20:49:15+00:00",
+  "version": "0.21.0",
+  "uuid": "e6b959f3-8e13-488e-8464-600567086158",
+  "timestamp": "2026-01-17T08:31:10+00:00",
   "root": "/github/workspace",
   "repository": {
     "owner": "robvanderleek",
@@ -26,33 +26,33 @@
         ],
         "profile": [119, 180, 0, 0]
       },
-      "serverless/src/": {
-        "entries": [
-          "config.js",
-          "helpers.test.js",
-          "helpers.js"
-        ],
-        "profile": [55, 62, 0, 0]
-      },
-      "serverless/": {
-        "entries": [
-          "src/",
-          "api/"
-        ],
-        "profile": [55, 62, 0, 0]
-      },
       "serverless/api/": {
         "entries": [
           "capture.js"
         ],
         "profile": [0, 0, 0, 0]
       },
+      "serverless/": {
+        "entries": [
+          "api/",
+          "src/"
+        ],
+        "profile": [55, 62, 0, 0]
+      },
+      "serverless/src/": {
+        "entries": [
+          "helpers.js",
+          "config.js",
+          "helpers.test.js"
+        ],
+        "profile": [55, 62, 0, 0]
+      },
       "standalone/src/": {
         "entries": [
+          "helpers.js",
           "config.js",
           "helpers.test.js",
-          "index.js",
-          "helpers.js"
+          "index.js"
         ],
         "profile": [64, 118, 0, 0]
       },
@@ -64,16 +64,8 @@
       }
     },
     "files": {
-      "serverless/src/config.js": {
-        "checksum": "cea0b99164c180ae66252958f40e754a",
-        "language": "JavaScript",
-        "loc": 0,
-        "profile": [0, 0, 0, 0],
-        "measurements": [
-        ]
-      },
-      "serverless/src/helpers.test.js": {
-        "checksum": "968b2cd578280ae6eff96c865c5ef380",
+      "serverless/api/capture.js": {
+        "checksum": "9d00a765c8e0bdddd30d4819c4570d48",
         "language": "JavaScript",
         "loc": 0,
         "profile": [0, 0, 0, 0],
@@ -97,12 +89,40 @@
           {"unit_name": "fieldValuesToNumber", "start": {"line": 122, "column": 1}, "end": {"line": 129, "column": 2}, "value": 8}
         ]
       },
-      "serverless/api/capture.js": {
-        "checksum": "9d00a765c8e0bdddd30d4819c4570d48",
+      "serverless/src/config.js": {
+        "checksum": "cea0b99164c180ae66252958f40e754a",
         "language": "JavaScript",
         "loc": 0,
         "profile": [0, 0, 0, 0],
         "measurements": [
+        ]
+      },
+      "serverless/src/helpers.test.js": {
+        "checksum": "968b2cd578280ae6eff96c865c5ef380",
+        "language": "JavaScript",
+        "loc": 0,
+        "profile": [0, 0, 0, 0],
+        "measurements": [
+        ]
+      },
+      "standalone/src/helpers.js": {
+        "checksum": "1dd564fc2450f4733dc44017962851e2",
+        "language": "JavaScript",
+        "loc": 154,
+        "profile": [57, 97, 0, 0],
+        "measurements": [
+          {"unit_name": "showResults", "start": {"line": 15, "column": 8}, "end": {"line": 18, "column": 2}, "value": 4},
+          {"unit_name": "doCaptureWork", "start": {"line": 20, "column": 14}, "end": {"line": 46, "column": 2}, "value": 27},
+          {"unit_name": "allowedRequest", "start": {"line": 48, "column": 8}, "end": {"line": 57, "column": 2}, "value": 10},
+          {"unit_name": "getOptions", "start": {"line": 59, "column": 8}, "end": {"line": 76, "column": 2}, "value": 17},
+          {"unit_name": "parseQueryParameters", "start": {"line": 78, "column": 1}, "end": {"line": 92, "column": 2}, "value": 15},
+          {"unit_name": "tryWithPuppeteer", "start": {"line": 94, "column": 7}, "end": {"line": 111, "column": 2}, "value": 18},
+          {"unit_name": "takePlainPuppeteerScreenshot", "start": {"line": 113, "column": 7}, "end": {"line": 131, "column": 2}, "value": 19},
+          {"unit_name": "setViewport", "start": {"line": 133, "column": 7}, "end": {"line": 142, "column": 2}, "value": 10},
+          {"unit_name": "getResponseType", "start": {"line": 144, "column": 8}, "end": {"line": 149, "column": 2}, "value": 6},
+          {"unit_name": "fieldValuesToNumber", "start": {"line": 151, "column": 8}, "end": {"line": 158, "column": 2}, "value": 8},
+          {"unit_name": "latestCapturePage", "start": {"line": 160, "column": 8}, "end": {"line": 175, "column": 2}, "value": 16},
+          {"unit_name": "latestCapture", "start": {"line": 177, "column": 8}, "end": {"line": 180, "column": 2}, "value": 4}
         ]
       },
       "standalone/src/config.js": {
@@ -130,26 +150,6 @@
         "profile": [0, 21, 0, 0],
         "measurements": [
           {"unit_name": "capture", "start": {"line": 8, "column": 7}, "end": {"line": 28, "column": 2}, "value": 21}
-        ]
-      },
-      "standalone/src/helpers.js": {
-        "checksum": "1dd564fc2450f4733dc44017962851e2",
-        "language": "JavaScript",
-        "loc": 154,
-        "profile": [57, 97, 0, 0],
-        "measurements": [
-          {"unit_name": "showResults", "start": {"line": 15, "column": 8}, "end": {"line": 18, "column": 2}, "value": 4},
-          {"unit_name": "doCaptureWork", "start": {"line": 20, "column": 14}, "end": {"line": 46, "column": 2}, "value": 27},
-          {"unit_name": "allowedRequest", "start": {"line": 48, "column": 8}, "end": {"line": 57, "column": 2}, "value": 10},
-          {"unit_name": "getOptions", "start": {"line": 59, "column": 8}, "end": {"line": 76, "column": 2}, "value": 17},
-          {"unit_name": "parseQueryParameters", "start": {"line": 78, "column": 1}, "end": {"line": 92, "column": 2}, "value": 15},
-          {"unit_name": "tryWithPuppeteer", "start": {"line": 94, "column": 7}, "end": {"line": 111, "column": 2}, "value": 18},
-          {"unit_name": "takePlainPuppeteerScreenshot", "start": {"line": 113, "column": 7}, "end": {"line": 131, "column": 2}, "value": 19},
-          {"unit_name": "setViewport", "start": {"line": 133, "column": 7}, "end": {"line": 142, "column": 2}, "value": 10},
-          {"unit_name": "getResponseType", "start": {"line": 144, "column": 8}, "end": {"line": 149, "column": 2}, "value": 6},
-          {"unit_name": "fieldValuesToNumber", "start": {"line": 151, "column": 8}, "end": {"line": 158, "column": 2}, "value": 8},
-          {"unit_name": "latestCapturePage", "start": {"line": 160, "column": 8}, "end": {"line": 175, "column": 2}, "value": 16},
-          {"unit_name": "latestCapture", "start": {"line": 177, "column": 8}, "end": {"line": 180, "column": 2}, "value": 4}
         ]
       }
     }
