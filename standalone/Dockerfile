@@ -1,6 +1,6 @@
 FROM node:24 AS build-cwa
 RUN mkdir /app
-COPY package.json package-lock.json app/
+COPY package.json package-lock.json /app
 COPY src /app/src
 WORKDIR /app
 RUN npm install && npm run build
