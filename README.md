@@ -73,7 +73,7 @@ docker run -it -p 8080:8080 cwa
 curl 'localhost:8080/capture?url=https://www.youtube.com' -o screenshot.png
 ```
 
-## Yarn
+## NPM
 
 Run in a terminal:
 
@@ -89,12 +89,12 @@ cd capture-website-api/standalone
 
 3. Install dependencies:
 ```shell
-yarn
+npm install
 ```
 
 4. Start the server:
 ```shell
-yarn start
+npm start
 ```
 
 5. Do screenshot test request:

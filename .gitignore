@@ -6,3 +6,4 @@
 # Local Netlify folder
 serverless/.netlify
 .vercel
+standalone/dist

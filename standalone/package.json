@@ -5,6 +5,7 @@
   "type": "module",
   "exports": "./src/index.js",
   "scripts": {
+    "build": "esbuild src/index.js --bundle --format=esm --external:typescript --platform=node --outfile=dist/index.js --banner:js=\"import { createRequire } from 'module'; const require = createRequire(import.meta.url);\"",
     "start": "node ./src/index.js",
     "dev": "nodemon src/index.js",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest"
@@ -22,10 +23,11 @@
     "@types/jest": "^30.0.0",
     "@types/node": "^24.0.13",
     "@types/express": "^5.0.1",
+    "esbuild": "^0.25.10",
     "jest": "^30.0.4",
     "nodemon": "^3.1.9"
   },
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=24.0.0"
   }
 }
