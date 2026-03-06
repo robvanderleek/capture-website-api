@@ -56,7 +56,7 @@ jobs:
     - name: Set up QEMU
       if: ${{ github.actor != 'dependabot[bot]' &&
           github.event_name == 'push' }}
-      uses: docker/setup-qemu-action@v3
+      uses: docker/setup-qemu-action@v4
 
     - name: Set up Docker Buildx
       if: ${{ github.actor != 'dependabot[bot]' &&
