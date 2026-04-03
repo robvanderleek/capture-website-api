@@ -23,7 +23,7 @@
     "@types/jest": "^30.0.0",
     "@types/node": "^24.0.13",
     "@types/express": "^5.0.1",
-    "esbuild": "^0.25.10",
+    "esbuild": "^0.28.0",
     "jest": "^30.0.4",
     "nodemon": "^3.1.9"
   },
