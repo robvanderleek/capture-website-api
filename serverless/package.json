@@ -17,7 +17,7 @@
     "@jest/globals": "^30.0.4",
     "@types/jest": "^30.0.0",
     "@types/node": "^24.0.13",
-    "jest": "^30.0.4"
+    "jest": "^30.4.2"
   },
   "engines": {
     "node": ">=20.0.0"
