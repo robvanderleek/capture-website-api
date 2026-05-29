@@ -625,13 +625,12 @@
   dependencies:
     "@sinonjs/commons" "^3.0.1"
 
-"@sparticuz/chromium@^138.0.1":
-  version "138.0.1"
-  resolved "https://registry.yarnpkg.com/@sparticuz/chromium/-/chromium-138.0.1.tgz#5052e070509f54ca93ffe738a514e6c0883e8dff"
-  integrity sha512-Ub58jeYFc/ePyWvVLqKzGE4/F/nL8KcsUHFNHNxDcqFogGTol4UHiwjZ8gLS4oGfbbT1ZPQHQ9hM3aBrqncBpQ==
+"@sparticuz/chromium@^149.0.0":
+  version "149.0.0"
+  resolved "https://registry.yarnpkg.com/@sparticuz/chromium/-/chromium-149.0.0.tgz#584bbeb711aa0828da9ecb174f6fbe0a3eb0c50a"
+  integrity sha512-2NECBVKlUA9xIUXb4fT8OoGKdAJs+I2tNYscO8FwcxCKCWA7FmpPI0fdVxGJoIJglrFZYn+4YEJqChq4rdrxQg==
   dependencies:
-    follow-redirects "^1.15.9"
-    tar-fs "^3.1.0"
+    tar-fs "^3.1.2"
 
 "@tootallnate/quickjs-emscripten@^0.23.0":
   version "0.23.0"
@@ -1361,11 +1360,6 @@ find-up@^4.0.0, find-up@^4.1.0:
   dependencies:
     locate-path "^5.0.0"
     path-exists "^4.0.0"
-
-follow-redirects@^1.15.9:
-  version "1.15.9"
-  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.9.tgz#a604fa10e443bf98ca94228d9eebcc2e8a2c8ee1"
-  integrity sha512-gew4GsXizNgdoRyqmyfMHyAmXsZDk6mHkSxZFCzW9gwlbtOW44CDtYavM+y+72qD/Vq2l550kMF52DT8fOLJqQ==
 
 foreground-child@^3.1.0:
   version "3.3.1"
@@ -2520,10 +2514,10 @@ synckit@^0.11.8:
   dependencies:
     "@pkgr/core" "^0.2.4"
 
-tar-fs@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/tar-fs/-/tar-fs-3.1.0.tgz#4675e2254d81410e609d91581a762608de999d25"
-  integrity sha512-5Mty5y/sOF1YWj1J6GiBodjlDc05CUR8PKXrsnFAiSG0xA+GHeWLovaZPYUDXkH/1iKRf2+M5+OrRgzC7O9b7w==
+tar-fs@^3.1.0, tar-fs@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/tar-fs/-/tar-fs-3.1.2.tgz#114b012f54796f31e62f3e57792820a80b83ae6e"
+  integrity sha512-QGxxTxxyleAdyM3kpFs14ymbYmNFrfY+pHj7Z8FgtbZ7w2//VAgLMac7sT6nRpIHjppXO2AwwEOg0bPFVRcmXw==
   dependencies:
     pump "^3.0.0"
     tar-stream "^3.1.5"
