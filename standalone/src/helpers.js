@@ -3,6 +3,7 @@ import puppeteer from 'puppeteer';
 import PQueue from "p-queue";
 import {getConcurrency, getDefaultTimeoutSeconds, getSecret, getShowResults} from "./config.js";
 import 'dotenv/config';
+import {isPublicHost} from "./host-validation.js";
 
 export const queue = new PQueue({concurrency: getConcurrency()});
 
@@ -17,10 +18,27 @@ export function showResults() {
     return showResults && showResults === 'true';
 }
 
+async function validateUrl(url) {
+    if (!URL.canParse(url)) {
+        return false;
+    }
+    const urlObj = new URL(url);
+    if (urlObj.protocol !== 'http:' && urlObj.protocol !== 'https:') {
+        return false;
+    }
+    return await isPublicHost(urlObj.hostname);
+}
+
 export async function doCaptureWork(queryParameters) {
     latest.date = new Date();
     const options = getOptions(queryParameters);
     const url = options.url;
+    if (!await validateUrl(url)) {
+        return {
+            statusCode: 400,
+            message: 'Invalid URL'
+        }
+    }
     latest.url = url;
     console.info('Capturing URL: ' + url + ' ...');
     if (options.plainPuppeteer === 'true') {
@@ -119,15 +137,34 @@ async function takePlainPuppeteerScreenshot(url, options) {
     try {
         browser = await puppeteer.launch(options.launchOptions);
         page = await browser.newPage();
+        await blockNonPublicRequests(page);
         await page.goto(url);
         await setViewport(page, options);
         await new Promise(r => setTimeout(r, options.wait_before_screenshot_ms));
         const array = await page.screenshot();
         buffer = Buffer.from(array);
     } finally {
-        await browser.close();
+        if (browser) {
+            await browser.close();
+        }
     }
     return buffer;
+}
+
+async function blockNonPublicRequests(page) {
+    await page.setRequestInterception(true);
+    page.on('request', async request => {
+        const requestUrl = new URL(request.url());
+        if (requestUrl.protocol === 'data:' || requestUrl.protocol === 'blob:') {
+            return await request.continue();
+        }
+        if (requestUrl.protocol === 'http:' || requestUrl.protocol === 'https:') {
+            if (await isPublicHost(requestUrl.hostname)) {
+                return await request.continue();
+            }
+        }
+        return await request.abort('accessdenied');
+    });
 }
 
 async function setViewport(page, options) {

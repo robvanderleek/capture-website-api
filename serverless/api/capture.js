@@ -3,6 +3,7 @@ const {allowedRequest, doCaptureWork} = require('../src/helpers.js');
 const handler = async function (request, response) {
     if (!allowedRequest(request.query)) {
         response.status(403).json({message: 'Go away please'})
+        return
     }
     const result = await doCaptureWork(request.query);
     if (result.statusCode === 200) {
