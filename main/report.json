@@ -1,7 +1,7 @@
 {
   "version": "0.21.0",
-  "uuid": "d29125cb-349c-46a3-ab3f-e2324f84a890",
-  "timestamp": "2026-11-19T07:35:21+00:00",
+  "uuid": "34d8f6e9-5b99-41a3-b179-970a689e59a9",
+  "timestamp": "2026-11-28T06:56:30+00:00",
   "root": "/github/workspace",
   "repository": {
     "owner": "robvanderleek",
@@ -26,37 +26,37 @@
         ],
         "profile": [213, 157, 33, 0]
       },
-      "serverless/src/": {
-        "entries": [
-          "host-validation.test.js",
-          "host-validation.js",
-          "helpers.test.js",
-          "config.js",
-          "helpers.js"
-        ],
-        "profile": [105, 63, 0, 0]
-      },
-      "serverless/": {
-        "entries": [
-          "src/",
-          "api/"
-        ],
-        "profile": [105, 63, 0, 0]
-      },
       "serverless/api/": {
         "entries": [
           "capture.js"
         ],
         "profile": [0, 0, 0, 0]
       },
+      "serverless/": {
+        "entries": [
+          "api/",
+          "src/"
+        ],
+        "profile": [105, 63, 0, 0]
+      },
+      "serverless/src/": {
+        "entries": [
+          "helpers.js",
+          "helpers.test.js",
+          "host-validation.js",
+          "host-validation.test.js",
+          "config.js"
+        ],
+        "profile": [105, 63, 0, 0]
+      },
       "standalone/src/": {
         "entries": [
+          "helpers.js",
+          "helpers.test.js",
+          "host-validation.js",
           "index.js",
           "host-validation.test.js",
-          "host-validation.js",
-          "helpers.test.js",
-          "config.js",
-          "helpers.js"
+          "config.js"
         ],
         "profile": [108, 94, 33, 0]
       },
@@ -68,8 +68,35 @@
       }
     },
     "files": {
-      "serverless/src/host-validation.test.js": {
-        "checksum": "4bafde77592b90e8c07ccef4d4a644c3",
+      "serverless/api/capture.js": {
+        "checksum": "95c0fe1773e2d5729cd99d1eac4ad18e",
+        "language": "JavaScript",
+        "loc": 0,
+        "profile": [0, 0, 0, 0],
+        "measurements": [
+        ]
+      },
+      "serverless/src/helpers.js": {
+        "checksum": "ae0f098da2d5bf68c8a0ffd700078f8c",
+        "language": "JavaScript",
+        "loc": 149,
+        "profile": [86, 63, 0, 0],
+        "measurements": [
+          {"unit_name": "validateUrl", "start": {"line": 7, "column": 7}, "end": {"line": 16, "column": 2}, "value": 10},
+          {"unit_name": "doCaptureWork", "start": {"line": 18, "column": 7}, "end": {"line": 29, "column": 2}, "value": 12},
+          {"unit_name": "allowedRequest", "start": {"line": 31, "column": 1}, "end": {"line": 40, "column": 2}, "value": 10},
+          {"unit_name": "getOptions", "start": {"line": 42, "column": 7}, "end": {"line": 63, "column": 2}, "value": 22},
+          {"unit_name": "parseQueryParameters", "start": {"line": 65, "column": 1}, "end": {"line": 79, "column": 2}, "value": 15},
+          {"unit_name": "tryWithPuppeteer", "start": {"line": 81, "column": 7}, "end": {"line": 97, "column": 2}, "value": 17},
+          {"unit_name": "takePlainPuppeteerScreenshot", "start": {"line": 99, "column": 7}, "end": {"line": 122, "column": 2}, "value": 24},
+          {"unit_name": "blockNonPublicRequests", "start": {"line": 124, "column": 7}, "end": {"line": 138, "column": 2}, "value": 15},
+          {"unit_name": "setViewport", "start": {"line": 140, "column": 7}, "end": {"line": 149, "column": 2}, "value": 10},
+          {"unit_name": "getResponseType", "start": {"line": 151, "column": 1}, "end": {"line": 156, "column": 2}, "value": 6},
+          {"unit_name": "fieldValuesToNumber", "start": {"line": 158, "column": 1}, "end": {"line": 165, "column": 2}, "value": 8}
+        ]
+      },
+      "serverless/src/helpers.test.js": {
+        "checksum": "04eb60999b1bb64faf50e6e0ac0a9b99",
         "language": "JavaScript",
         "loc": 0,
         "profile": [0, 0, 0, 0],
@@ -86,8 +113,8 @@
           {"unit_name": "isPublicHost", "start": {"line": 33, "column": 7}, "end": {"line": 47, "column": 2}, "value": 15}
         ]
       },
-      "serverless/src/helpers.test.js": {
-        "checksum": "968b2cd578280ae6eff96c865c5ef380",
+      "serverless/src/host-validation.test.js": {
+        "checksum": "4bafde77592b90e8c07ccef4d4a644c3",
         "language": "JavaScript",
         "loc": 0,
         "profile": [0, 0, 0, 0],
@@ -95,38 +122,53 @@
         ]
       },
       "serverless/src/config.js": {
-        "checksum": "cea0b99164c180ae66252958f40e754a",
+        "checksum": "d5e4c3d637c11916605443979ecc2602",
         "language": "JavaScript",
         "loc": 0,
         "profile": [0, 0, 0, 0],
         "measurements": [
         ]
       },
-      "serverless/src/helpers.js": {
-        "checksum": "ac7394a2e2a6bb2e567f00a60a39463b",
+      "standalone/src/helpers.js": {
+        "checksum": "f0719ea2bf4246a2142a9ea26d79ef3c",
         "language": "JavaScript",
-        "loc": 149,
-        "profile": [86, 63, 0, 0],
+        "loc": 188,
+        "profile": [82, 73, 33, 0],
         "measurements": [
-          {"unit_name": "validateUrl", "start": {"line": 6, "column": 7}, "end": {"line": 15, "column": 2}, "value": 10},
-          {"unit_name": "doCaptureWork", "start": {"line": 17, "column": 7}, "end": {"line": 28, "column": 2}, "value": 12},
-          {"unit_name": "allowedRequest", "start": {"line": 30, "column": 1}, "end": {"line": 39, "column": 2}, "value": 10},
-          {"unit_name": "getOptions", "start": {"line": 41, "column": 7}, "end": {"line": 62, "column": 2}, "value": 22},
-          {"unit_name": "parseQueryParameters", "start": {"line": 64, "column": 1}, "end": {"line": 78, "column": 2}, "value": 15},
-          {"unit_name": "tryWithPuppeteer", "start": {"line": 80, "column": 7}, "end": {"line": 96, "column": 2}, "value": 17},
-          {"unit_name": "takePlainPuppeteerScreenshot", "start": {"line": 98, "column": 7}, "end": {"line": 121, "column": 2}, "value": 24},
-          {"unit_name": "blockNonPublicRequests", "start": {"line": 123, "column": 7}, "end": {"line": 137, "column": 2}, "value": 15},
-          {"unit_name": "setViewport", "start": {"line": 139, "column": 7}, "end": {"line": 148, "column": 2}, "value": 10},
-          {"unit_name": "getResponseType", "start": {"line": 150, "column": 1}, "end": {"line": 155, "column": 2}, "value": 6},
-          {"unit_name": "fieldValuesToNumber", "start": {"line": 157, "column": 1}, "end": {"line": 164, "column": 2}, "value": 8}
+          {"unit_name": "showResults", "start": {"line": 22, "column": 8}, "end": {"line": 25, "column": 2}, "value": 4},
+          {"unit_name": "validateUrl", "start": {"line": 27, "column": 14}, "end": {"line": 36, "column": 2}, "value": 10},
+          {"unit_name": "doCaptureWork", "start": {"line": 38, "column": 14}, "end": {"line": 70, "column": 2}, "value": 33},
+          {"unit_name": "allowedRequest", "start": {"line": 72, "column": 8}, "end": {"line": 81, "column": 2}, "value": 10},
+          {"unit_name": "getOptions", "start": {"line": 83, "column": 8}, "end": {"line": 100, "column": 2}, "value": 17},
+          {"unit_name": "parseQueryParameters", "start": {"line": 102, "column": 1}, "end": {"line": 116, "column": 2}, "value": 15},
+          {"unit_name": "tryWithPuppeteer", "start": {"line": 118, "column": 7}, "end": {"line": 135, "column": 2}, "value": 18},
+          {"unit_name": "takePlainPuppeteerScreenshot", "start": {"line": 137, "column": 7}, "end": {"line": 158, "column": 2}, "value": 22},
+          {"unit_name": "blockNonPublicRequests", "start": {"line": 160, "column": 7}, "end": {"line": 174, "column": 2}, "value": 15},
+          {"unit_name": "setViewport", "start": {"line": 176, "column": 7}, "end": {"line": 185, "column": 2}, "value": 10},
+          {"unit_name": "getResponseType", "start": {"line": 187, "column": 8}, "end": {"line": 192, "column": 2}, "value": 6},
+          {"unit_name": "fieldValuesToNumber", "start": {"line": 194, "column": 8}, "end": {"line": 201, "column": 2}, "value": 8},
+          {"unit_name": "latestCapturePage", "start": {"line": 203, "column": 8}, "end": {"line": 218, "column": 2}, "value": 16},
+          {"unit_name": "latestCapture", "start": {"line": 220, "column": 8}, "end": {"line": 223, "column": 2}, "value": 4}
         ]
       },
-      "serverless/api/capture.js": {
-        "checksum": "95c0fe1773e2d5729cd99d1eac4ad18e",
+      "standalone/src/helpers.test.js": {
+        "checksum": "fce531d1e52755318b36f8a12a07ec16",
         "language": "JavaScript",
-        "loc": 0,
-        "profile": [0, 0, 0, 0],
+        "loc": 7,
+        "profile": [7, 0, 0, 0],
         "measurements": [
+          {"unit_name": "type", "start": {"line": 96, "column": 5}, "end": {"line": 104, "column": 6}, "value": 4},
+          {"unit_name": "send", "start": {"line": 99, "column": 9}, "end": {"line": 101, "column": 10}, "value": 3}
+        ]
+      },
+      "standalone/src/host-validation.js": {
+        "checksum": "71634fea31d4a5f004d1291c15610dcf",
+        "language": "JavaScript",
+        "loc": 19,
+        "profile": [19, 0, 0, 0],
+        "measurements": [
+          {"unit_name": "isBlockedIp", "start": {"line": 28, "column": 1}, "end": {"line": 31, "column": 2}, "value": 4},
+          {"unit_name": "isPublicHost", "start": {"line": 33, "column": 14}, "end": {"line": 47, "column": 2}, "value": 15}
         ]
       },
       "standalone/src/index.js": {
@@ -146,54 +188,12 @@
         "measurements": [
         ]
       },
-      "standalone/src/host-validation.js": {
-        "checksum": "71634fea31d4a5f004d1291c15610dcf",
-        "language": "JavaScript",
-        "loc": 19,
-        "profile": [19, 0, 0, 0],
-        "measurements": [
-          {"unit_name": "isBlockedIp", "start": {"line": 28, "column": 1}, "end": {"line": 31, "column": 2}, "value": 4},
-          {"unit_name": "isPublicHost", "start": {"line": 33, "column": 14}, "end": {"line": 47, "column": 2}, "value": 15}
-        ]
-      },
-      "standalone/src/helpers.test.js": {
-        "checksum": "d02a9f1931a9aad4b7b9d64573065071",
-        "language": "JavaScript",
-        "loc": 7,
-        "profile": [7, 0, 0, 0],
-        "measurements": [
-          {"unit_name": "type", "start": {"line": 95, "column": 5}, "end": {"line": 103, "column": 6}, "value": 4},
-          {"unit_name": "send", "start": {"line": 98, "column": 9}, "end": {"line": 100, "column": 10}, "value": 3}
-        ]
-      },
       "standalone/src/config.js": {
-        "checksum": "f0482f179c316519884dc5f44d7926e5",
+        "checksum": "b0abc2849a3b0b989749f195d0422c41",
         "language": "JavaScript",
         "loc": 0,
         "profile": [0, 0, 0, 0],
         "measurements": [
-        ]
-      },
-      "standalone/src/helpers.js": {
-        "checksum": "eba841be32039dc7ff64482c078d9570",
-        "language": "JavaScript",
-        "loc": 188,
-        "profile": [82, 73, 33, 0],
-        "measurements": [
-          {"unit_name": "showResults", "start": {"line": 16, "column": 8}, "end": {"line": 19, "column": 2}, "value": 4},
-          {"unit_name": "validateUrl", "start": {"line": 21, "column": 7}, "end": {"line": 30, "column": 2}, "value": 10},
-          {"unit_name": "doCaptureWork", "start": {"line": 32, "column": 14}, "end": {"line": 64, "column": 2}, "value": 33},
-          {"unit_name": "allowedRequest", "start": {"line": 66, "column": 8}, "end": {"line": 75, "column": 2}, "value": 10},
-          {"unit_name": "getOptions", "start": {"line": 77, "column": 8}, "end": {"line": 94, "column": 2}, "value": 17},
-          {"unit_name": "parseQueryParameters", "start": {"line": 96, "column": 1}, "end": {"line": 110, "column": 2}, "value": 15},
-          {"unit_name": "tryWithPuppeteer", "start": {"line": 112, "column": 7}, "end": {"line": 129, "column": 2}, "value": 18},
-          {"unit_name": "takePlainPuppeteerScreenshot", "start": {"line": 131, "column": 7}, "end": {"line": 152, "column": 2}, "value": 22},
-          {"unit_name": "blockNonPublicRequests", "start": {"line": 154, "column": 7}, "end": {"line": 168, "column": 2}, "value": 15},
-          {"unit_name": "setViewport", "start": {"line": 170, "column": 7}, "end": {"line": 179, "column": 2}, "value": 10},
-          {"unit_name": "getResponseType", "start": {"line": 181, "column": 8}, "end": {"line": 186, "column": 2}, "value": 6},
-          {"unit_name": "fieldValuesToNumber", "start": {"line": 188, "column": 8}, "end": {"line": 195, "column": 2}, "value": 8},
-          {"unit_name": "latestCapturePage", "start": {"line": 197, "column": 8}, "end": {"line": 212, "column": 2}, "value": 16},
-          {"unit_name": "latestCapture", "start": {"line": 214, "column": 8}, "end": {"line": 217, "column": 2}, "value": 4}
         ]
       }
     }
