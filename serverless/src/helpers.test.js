@@ -1,4 +1,4 @@
-const {allowedRequest, fieldValuesToNumber, getResponseType} = require("./helpers");
+const {allowedRequest, fieldValuesToNumber, getResponseType, validateUrl} = require("./helpers");
 const {expect} = require('@jest/globals');
 
 test('all requests are allowed by default', () => {
@@ -56,4 +56,14 @@ test('get response type', () => {
     expect(getResponseType({})).toBe('png');
     expect(getResponseType({type: 'jpeg'})).toBe('jpg');
     expect(getResponseType({type: 'png'})).toBe('png');
+});
+
+test('validate URL with public host validation disabled', async () => {
+    process.env.PUBLIC_HOST_VALIDATION = 'false';
+
+    expect(await validateUrl('http://192.168.1.1:8080')).toBeTruthy();
+
+    delete process.env.PUBLIC_HOST_VALIDATION;
+
+    expect(await validateUrl('http://192.168.1.1:8080')).toBeFalsy();
 });

@@ -5,7 +5,8 @@ import {
     getOptions,
     getResponseType,
     latestCapturePage,
-    showResults
+    showResults,
+    validateUrl
 } from "./helpers";
 import {expect, jest} from '@jest/globals'
 
@@ -119,4 +120,20 @@ test('get options', () => {
     });
     expect(result.width).toBe(650);
     expect(result.height).toBe(350);
-})
+});
+
+test('validate URL', async () => {
+    expect(await validateUrl('https://robvanderleek.github.io')).toBeTruthy();
+    expect(await validateUrl('ftp://robvanderleek.github.io')).toBeFalsy();
+    expect(await validateUrl('invalid-url')).toBeFalsy();
+});
+
+test('validate URL with public host validation disabled', async () => {
+    process.env.PUBLIC_HOST_VALIDATION = 'false';
+
+    expect(await validateUrl('http://192.168.1.1:8080')).toBeTruthy();
+
+    delete process.env.PUBLIC_HOST_VALIDATION;
+
+    expect(await validateUrl('http://192.168.1.1:8080')).toBeFalsy();
+});

@@ -1,7 +1,13 @@
 import captureWebsite from 'capture-website';
 import puppeteer from 'puppeteer';
 import PQueue from "p-queue";
-import {getConcurrency, getDefaultTimeoutSeconds, getSecret, getShowResults} from "./config.js";
+import {
+    getConcurrency,
+    getDefaultTimeoutSeconds,
+    getPublicHostValidation,
+    getSecret,
+    getShowResults
+} from "./config.js";
 import 'dotenv/config';
 import {isPublicHost} from "./host-validation.js";
 
@@ -18,7 +24,7 @@ export function showResults() {
     return showResults && showResults === 'true';
 }
 
-async function validateUrl(url) {
+export async function validateUrl(url) {
     if (!URL.canParse(url)) {
         return false;
     }
@@ -26,7 +32,7 @@ async function validateUrl(url) {
     if (urlObj.protocol !== 'http:' && urlObj.protocol !== 'https:') {
         return false;
     }
-    return await isPublicHost(urlObj.hostname);
+    return getPublicHostValidation() === 'false' || await isPublicHost(urlObj.hostname);
 }
 
 export async function doCaptureWork(queryParameters) {
@@ -159,7 +165,7 @@ async function blockNonPublicRequests(page) {
             return await request.continue();
         }
         if (requestUrl.protocol === 'http:' || requestUrl.protocol === 'https:') {
-            if (await isPublicHost(requestUrl.hostname)) {
+            if (getPublicHostValidation() === 'false' || await isPublicHost(requestUrl.hostname)) {
                 return await request.continue();
             }
         }

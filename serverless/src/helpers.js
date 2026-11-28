@@ -2,6 +2,7 @@ const {getSecret} = require('./config.js');
 const puppeteer = require('puppeteer-core');
 const chromium = require("@sparticuz/chromium");
 const {isPublicHost} = require("./host-validation");
+const {getPublicHostValidation} = require("./config");
 
 async function validateUrl(url) {
     if (!URL.canParse(url)) {
@@ -11,7 +12,7 @@ async function validateUrl(url) {
     if (urlObj.protocol !== 'http:' && urlObj.protocol !== 'https:') {
         return false;
     }
-    return await isPublicHost(urlObj.hostname);
+    return getPublicHostValidation() === 'false' || await isPublicHost(urlObj.hostname);
 }
 
 async function doCaptureWork(queryParameters) {
@@ -128,7 +129,7 @@ async function blockNonPublicRequests(page) {
             return await request.continue();
         }
         if (requestUrl.protocol === 'http:' || requestUrl.protocol === 'https:') {
-            if (await isPublicHost(requestUrl.hostname)) {
+            if (getPublicHostValidation() === 'false' || await isPublicHost(requestUrl.hostname)) {
                 return await request.continue();
             }
         }
@@ -167,5 +168,6 @@ module.exports = {
     doCaptureWork: doCaptureWork,
     allowedRequest: allowedRequest,
     getResponseType: getResponseType,
-    fieldValuesToNumber: fieldValuesToNumber
+    fieldValuesToNumber: fieldValuesToNumber,
+    validateUrl: validateUrl,
 }
